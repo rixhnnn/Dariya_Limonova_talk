@@ -17,6 +17,7 @@ const phrases = [
 ];
 
 let speechTimer;
+let phraseIndex = 0;
 
 function buildGrid() {
     const total = 4;
@@ -37,7 +38,11 @@ function buildGrid() {
 buildGrid();
 
 dog.addEventListener("click", () => {
-    const phrase = phrases[Math.floor(Math.random() * phrases.length)];
+    const phrase = phraseIndex < phrases.length
+        ? phrases[phraseIndex]
+        : phrases[Math.floor(Math.random() * phrases.length)];
+
+    phraseIndex += 1;
 
     speechBubble.textContent = phrase;
     speechBubble.classList.add("is-visible");
