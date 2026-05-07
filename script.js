@@ -18,7 +18,6 @@ const phrases = [
 
 let speechTimer;
 let phraseIndex = 0;
-let lastPhrase = "";
 
 function buildGrid() {
     const total = 4;
@@ -39,24 +38,8 @@ function buildGrid() {
 buildGrid();
 
 function getNextPhrase() {
-    if (phraseIndex < phrases.length) {
-        const phrase = phrases[phraseIndex];
-        phraseIndex += 1;
-        lastPhrase = phrase;
-        return phrase;
-    }
-
-    if (phrases.length <= 1) {
-        return phrases[0] || "";
-    }
-
-    let phrase = "";
-
-    do {
-        phrase = phrases[Math.floor(Math.random() * phrases.length)];
-    } while (phrase === lastPhrase);
-
-    lastPhrase = phrase;
+    const phrase = phrases[phraseIndex] || "";
+    phraseIndex = (phraseIndex + 1) % phrases.length;
     return phrase;
 }
 
