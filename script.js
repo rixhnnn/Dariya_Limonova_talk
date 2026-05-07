@@ -1,4 +1,5 @@
 const videoSrc = "img/489439949.webm";
+const imageFallbackSrc = "img/23b58c78-f46c-4e20-b72d-7c0462338ee8.png";
 const grid = document.querySelector(".background-grid");
 const dog = document.querySelector(".dog");
 const speechBubble = document.querySelector(".speech-bubble");
@@ -24,12 +25,31 @@ let rocketCleanupTimer;
 let finalEffectTimer;
 let phraseIndex = 0;
 let isRocketSequence = false;
+let lastInteractionTime = 0;
+
+function canPlayWebm() {
+    const testVideo = document.createElement("video");
+    return Boolean(
+        testVideo.canPlayType("video/webm")
+        || testVideo.canPlayType('video/webm; codecs="vp8, vorbis"')
+        || testVideo.canPlayType('video/webm; codecs="vp9"')
+    );
+}
 
 function buildGrid() {
     const total = 4;
+    const useVideo = canPlayWebm();
     grid.innerHTML = "";
 
     for (let i = 0; i < total; i += 1) {
+        if (!useVideo) {
+            const img = document.createElement("img");
+            img.src = imageFallbackSrc;
+            img.alt = "";
+            grid.appendChild(img);
+            continue;
+        }
+
         const video = document.createElement("video");
         video.src = videoSrc;
         video.autoplay = true;
@@ -85,6 +105,14 @@ function showNextPhrase(event) {
         event.preventDefault();
     }
 
+    const now = Date.now();
+
+    if (now - lastInteractionTime < 180) {
+        return;
+    }
+
+    lastInteractionTime = now;
+
     if (isRocketSequence) {
         return;
     }
@@ -118,13 +146,6 @@ function showNextPhrase(event) {
     }, 2200);
 }
 
-if (window.PointerEvent) {
-    dog.addEventListener("pointerup", showNextPhrase);
-    dog.addEventListener("click", (event) => {
-        if (event.detail === 0) {
-            showNextPhrase(event);
-        }
-    });
-} else {
-    dog.addEventListener("click", showNextPhrase);
-}
+dog.addEventListener("pointerup", showNextPhrase);
+dog.addEventListener("touchend", showNextPhrase, { passive: false });
+dog.addEventListener("click", showNextPhrase);
