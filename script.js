@@ -27,6 +27,11 @@ let phraseIndex = 0;
 let isRocketSequence = false;
 let lastInteractionTime = 0;
 
+function setViewportHeight() {
+    const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+    document.documentElement.style.setProperty("--vh", `${viewportHeight * 0.01}px`);
+}
+
 function canPlayWebm() {
     const testVideo = document.createElement("video");
     return Boolean(
@@ -36,6 +41,17 @@ function canPlayWebm() {
     );
 }
 
+function createFallbackImage() {
+    const img = document.createElement("img");
+    img.src = imageFallbackSrc;
+    img.alt = "";
+    return img;
+}
+
+function replaceWithFallback(media) {
+    media.replaceWith(createFallbackImage());
+}
+
 function buildGrid() {
     const total = 4;
     const useVideo = canPlayWebm();
@@ -43,10 +59,7 @@ function buildGrid() {
 
     for (let i = 0; i < total; i += 1) {
         if (!useVideo) {
-            const img = document.createElement("img");
-            img.src = imageFallbackSrc;
-            img.alt = "";
-            grid.appendChild(img);
+            grid.appendChild(createFallbackImage());
             continue;
         }
 
@@ -56,12 +69,26 @@ function buildGrid() {
         video.loop = true;
         video.muted = true;
         video.playsInline = true;
+        video.setAttribute("playsinline", "");
+        video.setAttribute("webkit-playsinline", "");
         video.preload = "metadata";
+        video.addEventListener("error", () => replaceWithFallback(video), { once: true });
         grid.appendChild(video);
+        video.play().catch(() => replaceWithFallback(video));
     }
 }
 
+setViewportHeight();
 buildGrid();
+
+window.addEventListener("resize", setViewportHeight);
+window.addEventListener("orientationchange", () => {
+    setTimeout(setViewportHeight, 250);
+});
+
+if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", setViewportHeight);
+}
 
 function getNextPhrase() {
     const phrase = phrases[phraseIndex] || "";
@@ -85,7 +112,7 @@ function launchRocket() {
     `;
 
     rocketTimer = setTimeout(() => {
-        rocketLayer.innerHTML = '<div class="explosion"></div>';
+        rocketLayer.innerHTML = '<div class="explosion"><span class="smoke-cloud"></span></div>';
         littlePerson.classList.remove("is-surprised");
         littlePerson.classList.add("is-fallen");
     }, 1120);
