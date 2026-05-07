@@ -70,7 +70,10 @@ body {
     border: 0;
     background: transparent;
     cursor: pointer;
+    touch-action: manipulation;
     transform: translateX(-50%);
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .dog:focus-visible {

@@ -18,7 +18,7 @@ const phrases = [
 
 let speechTimer;
 let phraseIndex = 0;
-let isSpeaking = false;
+let lastPhrase = "";
 
 function buildGrid() {
     const total = 4;
@@ -38,19 +38,41 @@ function buildGrid() {
 
 buildGrid();
 
-dog.addEventListener("click", () => {
-    if (isSpeaking) {
-        return;
+function getNextPhrase() {
+    if (phraseIndex < phrases.length) {
+        const phrase = phrases[phraseIndex];
+        phraseIndex += 1;
+        lastPhrase = phrase;
+        return phrase;
     }
 
-    const phrase = phraseIndex < phrases.length
-        ? phrases[phraseIndex]
-        : phrases[Math.floor(Math.random() * phrases.length)];
+    if (phrases.length <= 1) {
+        return phrases[0] || "";
+    }
 
-    phraseIndex += 1;
-    isSpeaking = true;
+    let phrase = "";
+
+    do {
+        phrase = phrases[Math.floor(Math.random() * phrases.length)];
+    } while (phrase === lastPhrase);
+
+    lastPhrase = phrase;
+    return phrase;
+}
+
+function showNextPhrase(event) {
+    if (event) {
+        event.preventDefault();
+    }
+
+    const phrase = getNextPhrase();
 
     speechBubble.textContent = phrase;
+    speechBubble.classList.remove("is-visible");
+    dog.classList.remove("is-talking");
+
+    speechBubble.offsetWidth;
+
     speechBubble.classList.add("is-visible");
     dog.classList.add("is-talking");
 
@@ -58,6 +80,16 @@ dog.addEventListener("click", () => {
     speechTimer = setTimeout(() => {
         speechBubble.classList.remove("is-visible");
         dog.classList.remove("is-talking");
-        isSpeaking = false;
     }, 2200);
-});
+}
+
+if (window.PointerEvent) {
+    dog.addEventListener("pointerup", showNextPhrase);
+    dog.addEventListener("click", (event) => {
+        if (event.detail === 0) {
+            showNextPhrase(event);
+        }
+    });
+} else {
+    dog.addEventListener("click", showNextPhrase);
+}
