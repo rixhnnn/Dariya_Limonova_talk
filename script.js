@@ -2,6 +2,8 @@ const videoSrc = "img/489439949.webm";
 const grid = document.querySelector(".background-grid");
 const dog = document.querySelector(".dog");
 const speechBubble = document.querySelector(".speech-bubble");
+const rocketLayer = document.querySelector(".rocket-layer");
+const littlePerson = document.querySelector(".little-person");
 const phrases = [
     "Пошли на хуй, бабки ебаные",
     "Продавец КФС",
@@ -17,7 +19,11 @@ const phrases = [
 ];
 
 let speechTimer;
+let rocketTimer;
+let rocketCleanupTimer;
+let finalEffectTimer;
 let phraseIndex = 0;
+let isRocketSequence = false;
 
 function buildGrid() {
     const total = 4;
@@ -39,8 +45,39 @@ buildGrid();
 
 function getNextPhrase() {
     const phrase = phrases[phraseIndex] || "";
+    const isLastPhrase = phraseIndex === phrases.length - 1;
+
     phraseIndex = (phraseIndex + 1) % phrases.length;
-    return phrase;
+    return { phrase, isLastPhrase };
+}
+
+function launchRocket() {
+    clearTimeout(rocketTimer);
+    clearTimeout(rocketCleanupTimer);
+    rocketLayer.innerHTML = "";
+    rocketLayer.offsetWidth;
+    rocketLayer.classList.add("is-active");
+    littlePerson.classList.add("is-surprised");
+    rocketLayer.innerHTML = `
+        <div class="rocket">
+            <span class="rocket-symbol"></span>
+        </div>
+    `;
+
+    rocketTimer = setTimeout(() => {
+        rocketLayer.innerHTML = '<div class="explosion"></div>';
+        littlePerson.classList.remove("is-surprised");
+        littlePerson.classList.add("is-fallen");
+    }, 1120);
+
+    rocketCleanupTimer = setTimeout(() => {
+        rocketLayer.innerHTML = "";
+        rocketLayer.classList.remove("is-active");
+        littlePerson.classList.remove("is-surprised");
+        littlePerson.classList.remove("is-fallen");
+        isRocketSequence = false;
+        dog.disabled = false;
+    }, 2100);
 }
 
 function showNextPhrase(event) {
@@ -48,7 +85,11 @@ function showNextPhrase(event) {
         event.preventDefault();
     }
 
-    const phrase = getNextPhrase();
+    if (isRocketSequence) {
+        return;
+    }
+
+    const { phrase, isLastPhrase } = getNextPhrase();
 
     speechBubble.textContent = phrase;
     speechBubble.classList.remove("is-visible");
@@ -58,6 +99,17 @@ function showNextPhrase(event) {
 
     speechBubble.classList.add("is-visible");
     dog.classList.add("is-talking");
+
+    if (isLastPhrase) {
+        isRocketSequence = true;
+        dog.disabled = true;
+        clearTimeout(finalEffectTimer);
+        finalEffectTimer = setTimeout(() => {
+            speechBubble.classList.remove("is-visible");
+            dog.classList.remove("is-talking");
+            launchRocket();
+        }, 900);
+    }
 
     clearTimeout(speechTimer);
     speechTimer = setTimeout(() => {

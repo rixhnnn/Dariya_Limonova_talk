@@ -58,6 +58,7 @@ body {
     width: min(62vw, 360px);
     height: min(62vw, 360px);
     filter: drop-shadow(0 18px 22px rgba(0, 0, 0, 0.45));
+    overflow: visible;
 }
 
 .dog {
@@ -294,6 +295,222 @@ body {
     transform: translate(-50%, 0) scale(1);
 }
 
+.little-person {
+    position: fixed;
+    right: 9vw;
+    bottom: 9vh;
+    z-index: 30;
+    width: 92px;
+    height: 138px;
+    pointer-events: none;
+    transform-origin: 50% 100%;
+}
+
+.little-person.is-surprised {
+    animation: person-surprise 0.42s ease-in-out 3;
+}
+
+.little-person.is-fallen {
+    animation: person-fall 0.5s ease-in forwards;
+}
+
+.person-head {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 48px;
+    height: 48px;
+    background: #ffd2a6;
+    border: 4px solid #25120b;
+    border-radius: 50%;
+    transform: translateX(-50%);
+}
+
+.person-head::before,
+.person-head::after {
+    content: "";
+    position: absolute;
+    top: 19px;
+    width: 6px;
+    height: 6px;
+    background: #25120b;
+    border-radius: 50%;
+}
+
+.person-head::before {
+    left: 14px;
+}
+
+.person-head::after {
+    right: 14px;
+}
+
+.person-body {
+    position: absolute;
+    left: 50%;
+    top: 49px;
+    width: 48px;
+    height: 58px;
+    background: linear-gradient(#2f80ed 0 50%, #ffd500 50% 100%);
+    border: 4px solid #25120b;
+    border-radius: 12px;
+    transform: translateX(-50%);
+}
+
+.person-arm,
+.person-leg {
+    position: absolute;
+    background: #25120b;
+    border-radius: 999px;
+}
+
+.person-arm {
+    top: 63px;
+    width: 34px;
+    height: 8px;
+}
+
+.person-arm-left {
+    left: 7px;
+    transform: rotate(-32deg);
+}
+
+.person-arm-right {
+    right: 7px;
+    transform: rotate(32deg);
+}
+
+.person-leg {
+    top: 111px;
+    width: 38px;
+    height: 9px;
+}
+
+.person-leg-left {
+    left: 10px;
+    transform: rotate(24deg);
+}
+
+.person-leg-right {
+    right: 10px;
+    transform: rotate(-24deg);
+}
+
+.rocket-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: none;
+    pointer-events: none;
+}
+
+.rocket-layer.is-active {
+    display: block;
+}
+
+.rocket {
+    position: fixed;
+    left: 50%;
+    top: 54%;
+    width: 58px;
+    height: 130px;
+    background: linear-gradient(90deg, #d9e2ec 0 24%, #ffffff 25% 74%, #9fb3c8 75% 100%);
+    border: 3px solid #25120b;
+    border-radius: 50% 50% 42% 42%;
+    transform: translate(-50%, -50%) rotate(16deg);
+    animation: rocket-launch 1.25s cubic-bezier(0.2, 0.9, 0.25, 1) forwards;
+}
+
+.rocket::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -36px;
+    width: 0;
+    height: 0;
+    border-left: 29px solid transparent;
+    border-right: 29px solid transparent;
+    border-bottom: 40px solid #e8333a;
+    transform: translateX(-50%);
+}
+
+.rocket::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -54px;
+    width: 36px;
+    height: 56px;
+    background: radial-gradient(circle at 50% 70%, #fff59d 0 12%, #ff9800 13% 48%, #f44336 49% 100%);
+    border-radius: 50% 50% 55% 55%;
+    transform: translateX(-50%);
+    animation: rocket-fire 0.16s ease-in-out infinite alternate;
+}
+
+.rocket-symbol {
+    position: absolute;
+    left: 50%;
+    top: 36%;
+    width: 36px;
+    height: 36px;
+    background:
+        conic-gradient(
+            from 30deg,
+            #25120b 0 60deg,
+            #f5d742 60deg 120deg,
+            #25120b 120deg 180deg,
+            #f5d742 180deg 240deg,
+            #25120b 240deg 300deg,
+            #f5d742 300deg 360deg
+        );
+    border: 2px solid #25120b;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.rocket-symbol::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    background: #f5d742;
+    border: 2px solid #25120b;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.explosion {
+    position: fixed;
+    left: 84%;
+    top: 78%;
+    width: 26px;
+    height: 26px;
+    background: #fff176;
+    border-radius: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.2);
+    animation: explosion-pop 0.72s ease-out forwards;
+}
+
+.explosion::before,
+.explosion::after {
+    content: "";
+    position: absolute;
+    inset: -34px;
+    background:
+        radial-gradient(circle at 50% 0, #ffeb3b 0 6px, transparent 7px),
+        radial-gradient(circle at 100% 50%, #ff5722 0 7px, transparent 8px),
+        radial-gradient(circle at 50% 100%, #ffeb3b 0 6px, transparent 7px),
+        radial-gradient(circle at 0 50%, #ff5722 0 7px, transparent 8px);
+    border-radius: 50%;
+}
+
+.explosion::after {
+    transform: rotate(45deg);
+}
+
 @keyframes dog-nod {
     0%,
     100% {
@@ -326,5 +543,74 @@ body {
 
     50% {
         transform: translateY(-8%) rotate(4deg);
+    }
+}
+
+@keyframes person-surprise {
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-12px) rotate(-4deg);
+    }
+}
+
+@keyframes person-fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(20px, 42px) rotate(82deg);
+    }
+}
+
+@keyframes rocket-launch {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) rotate(16deg) scale(0.82);
+    }
+
+    35% {
+        opacity: 1;
+        transform: translate(14vw, 10vh) rotate(112deg) scale(0.96);
+    }
+
+    78% {
+        opacity: 1;
+        transform: translate(32vw, 24vh) rotate(128deg) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(46vw, 34vh) rotate(145deg) scale(0.92);
+    }
+}
+
+@keyframes rocket-fire {
+    from {
+        transform: translateX(-50%) scaleY(0.78);
+    }
+
+    to {
+        transform: translateX(-50%) scaleY(1.18);
+    }
+}
+
+@keyframes explosion-pop {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.2) rotate(0deg);
+    }
+
+    18% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(3.2) rotate(35deg);
     }
 }
