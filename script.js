@@ -1,10 +1,9 @@
 const videoSrc = "img/489439949.webm";
-const imageFallbackSrc = "img/23b58c78-f46c-4e20-b72d-7c0462338ee8.png";
 const grid = document.querySelector(".background-grid");
 const dog = document.querySelector(".dog");
 const speechBubble = document.querySelector(".speech-bubble");
 const rocketLayer = document.querySelector(".rocket-layer");
-const littlePerson = document.querySelector(".little-person");
+const littlePeople = document.querySelectorAll(".little-person");
 const phrases = [
     "Пошли на хуй, бабки ебаные",
     "Продавец КФС",
@@ -32,37 +31,11 @@ function setViewportHeight() {
     document.documentElement.style.setProperty("--vh", `${viewportHeight * 0.01}px`);
 }
 
-function canPlayWebm() {
-    const testVideo = document.createElement("video");
-    return Boolean(
-        testVideo.canPlayType("video/webm")
-        || testVideo.canPlayType('video/webm; codecs="vp8, vorbis"')
-        || testVideo.canPlayType('video/webm; codecs="vp9"')
-    );
-}
-
-function createFallbackImage() {
-    const img = document.createElement("img");
-    img.src = imageFallbackSrc;
-    img.alt = "";
-    return img;
-}
-
-function replaceWithFallback(media) {
-    media.replaceWith(createFallbackImage());
-}
-
 function buildGrid() {
     const total = 4;
-    const useVideo = canPlayWebm();
     grid.innerHTML = "";
 
     for (let i = 0; i < total; i += 1) {
-        if (!useVideo) {
-            grid.appendChild(createFallbackImage());
-            continue;
-        }
-
         const video = document.createElement("video");
         video.src = videoSrc;
         video.autoplay = true;
@@ -72,9 +45,10 @@ function buildGrid() {
         video.setAttribute("playsinline", "");
         video.setAttribute("webkit-playsinline", "");
         video.preload = "metadata";
-        video.addEventListener("error", () => replaceWithFallback(video), { once: true });
         grid.appendChild(video);
-        video.play().catch(() => replaceWithFallback(video));
+        video.play().catch(() => {
+            video.controls = false;
+        });
     }
 }
 
@@ -104,31 +78,44 @@ function launchRocket() {
     rocketLayer.innerHTML = "";
     rocketLayer.offsetWidth;
     rocketLayer.classList.add("is-active");
-    littlePerson.classList.remove("is-fallen", "is-sick");
-    littlePerson.classList.add("is-visible");
-    littlePerson.classList.add("is-surprised");
+    littlePeople.forEach((person) => {
+        person.classList.remove("is-fallen", "is-sick");
+        person.classList.add("is-visible", "is-surprised");
+    });
     rocketLayer.innerHTML = `
-        <div class="rocket">
+        <div class="rocket rocket-left">
+            <span class="rocket-symbol"></span>
+        </div>
+        <div class="rocket rocket-right">
             <span class="rocket-symbol"></span>
         </div>
     `;
 
     rocketTimer = setTimeout(() => {
-        rocketLayer.innerHTML = '<div class="explosion"><span class="smoke-cloud"></span></div>';
-        littlePerson.classList.remove("is-surprised");
-        littlePerson.classList.add("is-fallen");
+        rocketLayer.innerHTML = `
+            <div class="explosion explosion-left"><span class="smoke-cloud"></span></div>
+            <div class="explosion explosion-right"><span class="smoke-cloud"></span></div>
+        `;
+        littlePeople.forEach((person) => {
+            person.classList.remove("is-surprised");
+            person.classList.add("is-fallen");
+        });
         setTimeout(() => {
-            littlePerson.classList.add("is-sick");
+            littlePeople.forEach((person) => {
+                person.classList.add("is-sick");
+            });
         }, 420);
-    }, 1120);
+    }, 1250);
 
     rocketCleanupTimer = setTimeout(() => {
         rocketLayer.innerHTML = "";
         rocketLayer.classList.remove("is-active");
-        littlePerson.classList.remove("is-visible", "is-surprised", "is-fallen", "is-sick");
+        littlePeople.forEach((person) => {
+            person.classList.remove("is-visible", "is-surprised", "is-fallen", "is-sick");
+        });
         isRocketSequence = false;
         dog.disabled = false;
-    }, 2100);
+    }, 3200);
 }
 
 function showNextPhrase(event) {
