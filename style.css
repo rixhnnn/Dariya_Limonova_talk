@@ -304,8 +304,14 @@ body {
     z-index: 30;
     width: 92px;
     height: 138px;
+    opacity: 0;
     pointer-events: none;
     transform-origin: 50% 100%;
+    transition: opacity 0.18s ease;
+}
+
+.little-person.is-visible {
+    opacity: 1;
 }
 
 .little-person.is-surprised {
@@ -314,6 +320,10 @@ body {
 
 .little-person.is-fallen {
     animation: person-fall 0.5s ease-in forwards;
+}
+
+.little-person.is-sick .person-head {
+    background: #83d65d;
 }
 
 .person-head {
@@ -787,7 +797,7 @@ body {
     }
 
     100% {
-        transform: translate(20px, 42px) rotate(82deg);
+        transform: translate(-42px, 40px) rotate(-92deg);
     }
 }
 
@@ -971,7 +981,7 @@ body {
         }
 
         100% {
-            transform: translate(12px, 28px) rotate(82deg);
+            transform: translate(-24px, 26px) rotate(-92deg);
         }
     }
 }

@@ -104,6 +104,8 @@ function launchRocket() {
     rocketLayer.innerHTML = "";
     rocketLayer.offsetWidth;
     rocketLayer.classList.add("is-active");
+    littlePerson.classList.remove("is-fallen", "is-sick");
+    littlePerson.classList.add("is-visible");
     littlePerson.classList.add("is-surprised");
     rocketLayer.innerHTML = `
         <div class="rocket">
@@ -115,13 +117,15 @@ function launchRocket() {
         rocketLayer.innerHTML = '<div class="explosion"><span class="smoke-cloud"></span></div>';
         littlePerson.classList.remove("is-surprised");
         littlePerson.classList.add("is-fallen");
+        setTimeout(() => {
+            littlePerson.classList.add("is-sick");
+        }, 420);
     }, 1120);
 
     rocketCleanupTimer = setTimeout(() => {
         rocketLayer.innerHTML = "";
         rocketLayer.classList.remove("is-active");
-        littlePerson.classList.remove("is-surprised");
-        littlePerson.classList.remove("is-fallen");
+        littlePerson.classList.remove("is-visible", "is-surprised", "is-fallen", "is-sick");
         isRocketSequence = false;
         dog.disabled = false;
     }, 2100);
