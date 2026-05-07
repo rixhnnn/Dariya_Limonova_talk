@@ -614,3 +614,143 @@ body {
         transform: translate(-50%, -50%) scale(3.2) rotate(35deg);
     }
 }
+
+@media (max-width: 640px) {
+    .dog-scene {
+        width: min(76vw, 300px);
+        height: min(76vw, 300px);
+        transform: translateY(-8vh);
+    }
+
+    .little-person {
+        right: 8vw;
+        bottom: 14vh;
+        width: 66px;
+        height: 100px;
+    }
+
+    .person-head {
+        width: 34px;
+        height: 34px;
+        border-width: 3px;
+    }
+
+    .person-head::before,
+    .person-head::after {
+        top: 13px;
+        width: 5px;
+        height: 5px;
+    }
+
+    .person-head::before {
+        left: 9px;
+    }
+
+    .person-head::after {
+        right: 9px;
+    }
+
+    .person-body {
+        top: 35px;
+        width: 34px;
+        height: 42px;
+        border-width: 3px;
+        border-radius: 8px;
+    }
+
+    .person-arm {
+        top: 46px;
+        width: 24px;
+        height: 6px;
+    }
+
+    .person-arm-left {
+        left: 5px;
+    }
+
+    .person-arm-right {
+        right: 5px;
+    }
+
+    .person-leg {
+        top: 80px;
+        width: 27px;
+        height: 7px;
+    }
+
+    .person-leg-left {
+        left: 7px;
+    }
+
+    .person-leg-right {
+        right: 7px;
+    }
+
+    .rocket {
+        left: 50%;
+        top: 48%;
+        width: 42px;
+        height: 94px;
+        animation-name: rocket-launch-mobile;
+    }
+
+    .rocket::before {
+        top: -28px;
+        border-left-width: 21px;
+        border-right-width: 21px;
+        border-bottom-width: 31px;
+    }
+
+    .rocket::after {
+        bottom: -38px;
+        width: 26px;
+        height: 40px;
+    }
+
+    .rocket-symbol {
+        width: 27px;
+        height: 27px;
+    }
+
+    .rocket-symbol::after {
+        width: 8px;
+        height: 8px;
+    }
+
+    .explosion {
+        left: 77%;
+        top: 72%;
+    }
+
+    @keyframes rocket-launch-mobile {
+        0% {
+            opacity: 1;
+            transform: translate(-50%, -50%) rotate(16deg) scale(0.82);
+        }
+
+        35% {
+            opacity: 1;
+            transform: translate(18vw, 10vh) rotate(112deg) scale(0.96);
+        }
+
+        78% {
+            opacity: 1;
+            transform: translate(30vw, 18vh) rotate(128deg) scale(1);
+        }
+
+        100% {
+            opacity: 0;
+            transform: translate(36vw, 24vh) rotate(145deg) scale(0.92);
+        }
+    }
+
+    @keyframes person-fall {
+        0% {
+            transform: translateY(0) rotate(0deg);
+        }
+
+        100% {
+            transform: translate(12px, 28px) rotate(82deg);
+        }
+    }
+}
