@@ -3,7 +3,16 @@ const grid = document.querySelector(".background-grid");
 const dog = document.querySelector(".dog");
 const speechBubble = document.querySelector(".speech-bubble");
 const phrases = [
-    "СЫН УБОРЩИЦЫ",
+    "Пошли на хуй, бабки ебаные",
+    "Продавец КФС",
+    "Дырявый",
+    "Кирилл Дырявый",
+    "Овервотч хуйня ебаная",
+    "Го на забив",
+    "Не дай Бох такое",
+    "Сын унитаза",
+    "ЕБЕМ ДЕТЕЙ",
+    "Раздеть уебка",
 ];
 
 let speechTimer;
