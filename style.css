@@ -34,9 +34,24 @@ body {
     display: block;
 }
 
+.domain-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    background: #000;
+    -webkit-clip-path: circle(0 at var(--domain-x, 50vw) var(--domain-y, 50vh));
+    clip-path: circle(0 at var(--domain-x, 50vw) var(--domain-y, 50vh));
+}
+
+.domain-backdrop.is-active {
+    animation: domain-backdrop-open 4s cubic-bezier(0.16, 0.84, 0.24, 1) forwards;
+}
+
 .content {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     min-height: calc(var(--vh, 1vh) * 100);
     display: grid;
     place-items: center;
@@ -60,6 +75,344 @@ body {
     height: min(62vw, 360px);
     filter: drop-shadow(0 18px 22px rgba(0, 0, 0, 0.45));
     overflow: visible;
+}
+
+.domain-tomb {
+    position: absolute;
+    left: 50%;
+    bottom: 8%;
+    z-index: 0;
+    width: 158%;
+    height: 112%;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, 34%) scale(0.72);
+    transform-origin: 50% 100%;
+    filter:
+        drop-shadow(0 24px 34px rgba(0, 0, 0, 0.9))
+        drop-shadow(0 0 26px rgba(120, 0, 0, 0.48));
+}
+
+.domain-tomb::before,
+.domain-tomb::after {
+    content: "";
+    position: absolute;
+    bottom: 8%;
+    width: 22%;
+    height: 78%;
+    background:
+        radial-gradient(circle at 50% 22%, rgba(180, 0, 0, 0.28) 0 4px, transparent 5px),
+        linear-gradient(180deg, #172124 0%, #050707 100%);
+    clip-path: polygon(22% 0, 82% 10%, 64% 28%, 92% 44%, 66% 56%, 100% 100%, 0 100%, 28% 62%, 4% 45%, 30% 29%);
+    opacity: 0;
+    filter: blur(1px);
+    transform-origin: 50% 100%;
+}
+
+.domain-tomb::before {
+    left: 2%;
+    transform: rotate(-13deg) scale(0.86);
+}
+
+.domain-tomb::after {
+    right: 2%;
+    transform: rotate(13deg) scaleX(-1) scale(0.86);
+}
+
+.domain-tomb.is-visible::before,
+.domain-tomb.is-visible::after {
+    animation: tomb-details-in 1.2s ease 0.55s forwards;
+}
+
+.domain-tomb.is-visible {
+    animation: tomb-rise 1.9s cubic-bezier(0.16, 0.84, 0.24, 1) forwards;
+}
+
+.tomb-roof,
+.tomb-body,
+.tomb-gate,
+.tomb-horn,
+.tomb-skull,
+.tomb-bone,
+.tomb-ground {
+    position: absolute;
+    display: block;
+}
+
+.tomb-body {
+    left: 50%;
+    bottom: 15%;
+    width: 68%;
+    height: 47%;
+    background:
+        linear-gradient(90deg, transparent 0 10%, rgba(255, 255, 255, 0.07) 11% 12%, transparent 13% 24%, rgba(255, 255, 255, 0.05) 25% 26%, transparent 27% 74%, rgba(255, 255, 255, 0.05) 75% 76%, transparent 77% 100%),
+        radial-gradient(circle at 50% 0, rgba(135, 0, 0, 0.28), transparent 52%),
+        linear-gradient(180deg, #303f42 0%, #111819 58%, #030404 100%);
+    border: 4px solid #526468;
+    border-bottom-color: #07090a;
+    border-radius: 7% 7% 2% 2%;
+    transform: translateX(-50%);
+    box-shadow:
+        inset 0 18px 20px rgba(230, 250, 255, 0.12),
+        inset 0 -26px 28px rgba(0, 0, 0, 0.82),
+        0 0 28px rgba(90, 0, 0, 0.52);
+}
+
+.tomb-roof {
+    left: 50%;
+    bottom: 58%;
+    width: 92%;
+    height: 24%;
+    background:
+        radial-gradient(circle at 50% 18%, rgba(160, 0, 0, 0.32), transparent 36%),
+        linear-gradient(180deg, #4b5b60 0%, #12191b 70%, #030405 100%);
+    clip-path: polygon(3% 72%, 15% 46%, 22% 18%, 37% 26%, 50% 0, 63% 26%, 78% 18%, 85% 46%, 97% 72%, 100% 72%, 96% 100%, 4% 100%, 0 72%);
+    transform: translateX(-50%);
+    box-shadow:
+        0 9px 0 #050607,
+        0 0 24px rgba(120, 0, 0, 0.46);
+}
+
+.tomb-roof::before,
+.tomb-roof::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 62%;
+    transform: translateX(-50%);
+}
+
+.tomb-roof::before {
+    width: 34%;
+    height: 88%;
+    background:
+        radial-gradient(circle at 50% 56%, #050607 0 10%, transparent 11%),
+        linear-gradient(180deg, #243236 0%, #050607 100%);
+    clip-path: polygon(50% 0, 60% 30%, 88% 12%, 72% 48%, 100% 52%, 70% 70%, 50% 100%, 30% 70%, 0 52%, 28% 48%, 12% 12%, 40% 30%);
+    filter: drop-shadow(0 0 12px rgba(120, 0, 0, 0.72));
+}
+
+.tomb-roof::after {
+    width: 52%;
+    height: 72%;
+    border-left: 10px solid #172124;
+    border-right: 10px solid #172124;
+    border-top: 8px solid #172124;
+    border-radius: 48% 48% 0 0;
+    clip-path: polygon(0 0, 22% 100%, 50% 22%, 78% 100%, 100% 0, 86% 100%, 14% 100%);
+    opacity: 0.95;
+}
+
+.tomb-gate {
+    left: 50%;
+    bottom: 15%;
+    width: 25%;
+    height: 38%;
+    background:
+        radial-gradient(ellipse at 50% 15%, rgba(200, 230, 230, 0.28), transparent 58%),
+        linear-gradient(180deg, #0d1516 0%, #020303 100%);
+    border: 3px solid #263236;
+    border-bottom: 0;
+    border-radius: 50% 50% 0 0;
+    transform: translateX(-50%);
+    box-shadow:
+        inset 0 0 24px rgba(180, 230, 230, 0.22),
+        0 0 28px rgba(140, 220, 220, 0.2),
+        0 0 34px rgba(120, 0, 0, 0.34);
+}
+
+.tomb-horn {
+    bottom: 68%;
+    width: 30%;
+    height: 38%;
+    border-top: 16px solid #1c292d;
+    border-left: 13px solid #1c292d;
+    border-radius: 100% 0 0 0;
+    opacity: 0;
+    filter: drop-shadow(0 0 12px rgba(130, 0, 0, 0.58));
+}
+
+.domain-tomb.is-visible .tomb-horn,
+.domain-tomb.is-visible .tomb-skull,
+.domain-tomb.is-visible .tomb-bone,
+.domain-tomb.is-visible .tomb-ground {
+    animation: tomb-details-in 1.2s ease 0.72s forwards;
+}
+
+.horn-left {
+    left: 20%;
+    transform: rotate(-48deg);
+}
+
+.horn-right {
+    right: 20%;
+    transform: scaleX(-1) rotate(-48deg);
+}
+
+.tomb-ground {
+    left: 50%;
+    bottom: -5%;
+    z-index: 1;
+    width: 182%;
+    height: 30%;
+    background:
+        radial-gradient(ellipse at 50% 55%, rgba(10, 20, 20, 0.55) 0 14%, transparent 15%),
+        radial-gradient(circle at 9% 42%, #700505 0 4px, transparent 5px),
+        radial-gradient(circle at 18% 45%, #a00b09 0 5px, transparent 6px),
+        radial-gradient(circle at 29% 62%, #8b0908 0 4px, transparent 5px),
+        radial-gradient(circle at 44% 50%, #b70e0c 0 5px, transparent 6px),
+        radial-gradient(circle at 58% 65%, #7c0506 0 4px, transparent 5px),
+        radial-gradient(circle at 72% 44%, #a40a09 0 5px, transparent 6px),
+        radial-gradient(circle at 84% 60%, #9d0d0b 0 4px, transparent 5px),
+        radial-gradient(circle at 94% 46%, #650404 0 4px, transparent 5px),
+        linear-gradient(90deg, rgba(85, 0, 0, 0.75) 0%, rgba(130, 0, 0, 0.96) 16%, rgba(185, 0, 0, 0.98) 50%, rgba(130, 0, 0, 0.96) 84%, rgba(85, 0, 0, 0.75) 100%);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+}
+
+.tomb-skull {
+    bottom: 10%;
+    z-index: 4;
+    width: 42px;
+    height: 35px;
+    background: #9aa5a4;
+    border: 3px solid #1a2224;
+    border-radius: 52% 52% 44% 44%;
+    opacity: 0;
+}
+
+.tomb-skull::before {
+    content: "";
+    position: absolute;
+    left: 7px;
+    top: 9px;
+    width: 6px;
+    height: 7px;
+    background: #060707;
+    border-radius: 50%;
+    box-shadow: 13px 0 0 #060707, 7px 10px 0 -1px #060707;
+}
+
+.tomb-skull::after {
+    content: "";
+    position: absolute;
+    left: 8px;
+    bottom: -7px;
+    width: 18px;
+    height: 10px;
+    background: repeating-linear-gradient(90deg, #9aa5a4 0 4px, #1a2224 5px 6px);
+    border: 2px solid #1a2224;
+    border-top: 0;
+    border-radius: 0 0 6px 6px;
+}
+
+.skull-left {
+    left: 10%;
+    transform: rotate(-18deg) scale(1.1);
+}
+
+.skull-right {
+    right: 9%;
+    transform: rotate(14deg) scale(1.02);
+}
+
+.skull-mid-left {
+    left: 28%;
+    bottom: 5%;
+    transform: rotate(9deg) scale(0.72);
+}
+
+.skull-mid-right {
+    right: 29%;
+    bottom: 6%;
+    transform: rotate(-24deg) scale(0.78);
+}
+
+.skull-small-left {
+    left: -1%;
+    bottom: 14%;
+    transform: rotate(28deg) scale(0.62);
+}
+
+.skull-small-right {
+    right: 1%;
+    bottom: 16%;
+    transform: rotate(-31deg) scale(0.58);
+}
+
+.tomb-bone {
+    bottom: 7%;
+    z-index: 4;
+    width: 70px;
+    height: 10px;
+    background: #aeb8b6;
+    border: 2px solid #1a2224;
+    border-radius: 999px;
+    opacity: 0;
+}
+
+.tomb-bone::before,
+.tomb-bone::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 13px;
+    height: 13px;
+    background: #aeb8b6;
+    border: 2px solid #1a2224;
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
+
+.tomb-bone::before {
+    left: -8px;
+    box-shadow: 5px -7px 0 -2px #aeb8b6;
+}
+
+.tomb-bone::after {
+    right: -8px;
+    box-shadow: -5px 7px 0 -2px #aeb8b6;
+}
+
+.bone-left {
+    left: 2%;
+    transform: rotate(22deg);
+}
+
+.bone-right {
+    right: 4%;
+    transform: rotate(-24deg);
+}
+
+.bone-mid-left {
+    left: 23%;
+    bottom: 12%;
+    width: 48px;
+    transform: rotate(-16deg) scale(0.78);
+}
+
+.bone-mid-right {
+    right: 22%;
+    bottom: 10%;
+    width: 54px;
+    transform: rotate(19deg) scale(0.84);
+}
+
+.bone-small-left {
+    left: 40%;
+    bottom: 4%;
+    width: 34px;
+    height: 7px;
+    transform: rotate(34deg) scale(0.68);
+}
+
+.bone-small-right {
+    right: 39%;
+    bottom: 5%;
+    width: 38px;
+    height: 7px;
+    transform: rotate(-38deg) scale(0.7);
 }
 
 .demon-skill-icon {
@@ -139,6 +492,11 @@ body {
     transform: translateX(-50%);
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+}
+
+.dog-scene.is-sukuna.is-on-tomb .dog {
+    z-index: 5;
+    animation: sukuna-rise-to-tomb 1.9s cubic-bezier(0.16, 0.84, 0.24, 1) forwards;
 }
 
 .dog:focus-visible {
@@ -1676,6 +2034,89 @@ body {
     }
 }
 
+@keyframes domain-backdrop-open {
+    0% {
+        opacity: 0;
+        -webkit-clip-path: circle(0 at var(--domain-x, 50vw) var(--domain-y, 50vh));
+        clip-path: circle(0 at var(--domain-x, 50vw) var(--domain-y, 50vh));
+        filter: blur(8px);
+    }
+
+    35% {
+        opacity: 1;
+        filter: blur(2px);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-clip-path: circle(150vmax at var(--domain-x, 50vw) var(--domain-y, 50vh));
+        clip-path: circle(150vmax at var(--domain-x, 50vw) var(--domain-y, 50vh));
+        filter: blur(0);
+    }
+}
+
+@keyframes tomb-rise {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 44%) scale(0.68);
+        filter: blur(8px) drop-shadow(0 20px 30px rgba(0, 0, 0, 0.75));
+    }
+
+    35% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, 0) scale(1);
+        filter: blur(0) drop-shadow(0 20px 30px rgba(0, 0, 0, 0.75));
+    }
+}
+
+@keyframes sukuna-rise-to-tomb {
+    0% {
+        transform: translateX(-50%) translateY(0) scale(1);
+        filter: drop-shadow(0 12px 14px rgba(0, 0, 0, 0.45));
+    }
+
+    35% {
+        transform: translateX(-50%) translateY(-18%) scale(0.98);
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(-126%) scale(0.72);
+        filter: drop-shadow(0 16px 18px rgba(0, 0, 0, 0.68));
+    }
+}
+
+@keyframes sukuna-rise-to-tomb-mobile {
+    0% {
+        transform: translateX(-50%) translateY(0) scale(1);
+        filter: drop-shadow(0 12px 14px rgba(0, 0, 0, 0.45));
+    }
+
+    35% {
+        transform: translateX(-50%) translateY(-14%) scale(0.98);
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(-104%) scale(0.68);
+        filter: drop-shadow(0 16px 18px rgba(0, 0, 0, 0.68));
+    }
+}
+
+@keyframes tomb-details-in {
+    0% {
+        opacity: 0;
+        filter: blur(5px);
+    }
+
+    100% {
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
 @keyframes balloon-float {
     0%,
     100% {
@@ -1774,6 +2215,10 @@ body {
         width: min(76vw, 300px);
         height: min(76vw, 300px);
         transform: translateY(-8vh);
+    }
+
+    .dog-scene.is-sukuna.is-on-tomb .dog {
+        animation-name: sukuna-rise-to-tomb-mobile;
     }
 
     .people-crowd {

@@ -5,6 +5,8 @@ const speechBubble = document.querySelector(".speech-bubble");
 const domainPopupPrimary = document.querySelector(".domain-popup-primary");
 const domainPopupSecondary = document.querySelector(".domain-popup-secondary");
 const dogScene = document.querySelector(".dog-scene");
+const domainBackdrop = document.querySelector(".domain-backdrop");
+const domainTomb = document.querySelector(".domain-tomb");
 const demonSkillIcon = document.querySelector(".demon-skill-icon");
 const rocketLayer = document.querySelector(".rocket-layer");
 const littlePeople = document.querySelectorAll(".little-person");
@@ -34,6 +36,7 @@ let domainPopupTimer;
 let domainSecondPopupTimer;
 let domainPopupCleanupTimer;
 let domainTextCleanupTimer;
+let domainBackdropTimer;
 let phraseIndex = 0;
 let isRocketSequence = false;
 let lastInteractionTime = 0;
@@ -181,10 +184,13 @@ function showDomainPopupSequence() {
     clearTimeout(domainSecondPopupTimer);
     clearTimeout(domainPopupCleanupTimer);
     clearTimeout(domainTextCleanupTimer);
+    clearTimeout(domainBackdropTimer);
     clearTimeout(speechTimer);
 
     speechBubble.classList.remove("is-visible");
     dog.classList.remove("is-talking");
+    domainTomb.classList.remove("is-visible");
+    dogScene.classList.remove("is-on-tomb");
 
     const randomPhrase = domainPhrases[Math.floor(Math.random() * domainPhrases.length)];
 
@@ -200,6 +206,7 @@ function showDomainPopupSequence() {
 
     domainPopupTimer = setTimeout(() => {
         domainPopupPrimary.classList.remove("is-visible");
+        showDomainBackdrop();
     }, 1400);
 
     domainSecondPopupTimer = setTimeout(() => {
@@ -217,15 +224,40 @@ function showDomainPopupSequence() {
     }, 4620);
 }
 
+function showDomainBackdrop() {
+    const rect = dogScene.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    domainBackdrop.style.setProperty("--domain-x", `${centerX}px`);
+    domainBackdrop.style.setProperty("--domain-y", `${centerY}px`);
+    domainBackdrop.classList.remove("is-active");
+    domainBackdrop.offsetWidth;
+    domainBackdrop.classList.add("is-active");
+
+    domainBackdropTimer = setTimeout(() => {
+        dogScene.classList.remove("is-on-tomb");
+        domainTomb.classList.remove("is-visible");
+        dogScene.offsetWidth;
+        domainTomb.offsetWidth;
+        dogScene.classList.add("is-on-tomb");
+        domainTomb.classList.add("is-visible");
+    }, 4000);
+}
+
 function hideDomainPopups() {
     clearTimeout(domainPopupTimer);
     clearTimeout(domainSecondPopupTimer);
     clearTimeout(domainPopupCleanupTimer);
     clearTimeout(domainTextCleanupTimer);
+    clearTimeout(domainBackdropTimer);
     domainPopupPrimary.classList.remove("is-visible");
     domainPopupSecondary.classList.remove("is-visible");
     domainPopupPrimary.textContent = "";
     domainPopupSecondary.textContent = "";
+    domainBackdrop.classList.remove("is-active");
+    domainTomb.classList.remove("is-visible");
+    dogScene.classList.remove("is-on-tomb");
     speechBubble.classList.remove("is-visible");
     dog.classList.remove("is-talking");
 }
