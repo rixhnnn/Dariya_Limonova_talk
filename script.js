@@ -2,10 +2,15 @@ const videoSrc = "img/489439949.webm";
 const grid = document.querySelector(".background-grid");
 const dog = document.querySelector(".dog");
 const speechBubble = document.querySelector(".speech-bubble");
+const domainPopupPrimary = document.querySelector(".domain-popup-primary");
+const domainPopupSecondary = document.querySelector(".domain-popup-secondary");
 const dogScene = document.querySelector(".dog-scene");
 const demonSkillIcon = document.querySelector(".demon-skill-icon");
 const rocketLayer = document.querySelector(".rocket-layer");
 const littlePeople = document.querySelectorAll(".little-person");
+const domainPhrases = [
+    "Цыганская резня бензопилой",
+];
 const phrases = [
     "Пошли на хуй, бабки ебаные",
     "Продавец КФС",
@@ -25,6 +30,8 @@ let speechTimer;
 let rocketTimer;
 let rocketCleanupTimer;
 let finalEffectTimer;
+let domainPopupTimer;
+let domainPopupCleanupTimer;
 let phraseIndex = 0;
 let isRocketSequence = false;
 let lastInteractionTime = 0;
@@ -167,6 +174,38 @@ function showNextPhrase(event) {
     }, 2200);
 }
 
+function showDomainPopupSequence() {
+    clearTimeout(domainPopupTimer);
+    clearTimeout(domainPopupCleanupTimer);
+
+    const randomPhrase = domainPhrases[Math.floor(Math.random() * domainPhrases.length)];
+
+    domainPopupPrimary.textContent = "Ryoiki Tenkai";
+    domainPopupSecondary.textContent = randomPhrase;
+    domainPopupPrimary.classList.remove("is-visible");
+    domainPopupSecondary.classList.remove("is-visible");
+
+    domainPopupPrimary.offsetWidth;
+
+    domainPopupPrimary.classList.add("is-visible");
+
+    domainPopupTimer = setTimeout(() => {
+        domainPopupPrimary.classList.remove("is-visible");
+        domainPopupSecondary.classList.add("is-visible");
+    }, 1400);
+
+    domainPopupCleanupTimer = setTimeout(() => {
+        domainPopupSecondary.classList.remove("is-visible");
+    }, 3600);
+}
+
+function hideDomainPopups() {
+    clearTimeout(domainPopupTimer);
+    clearTimeout(domainPopupCleanupTimer);
+    domainPopupPrimary.classList.remove("is-visible");
+    domainPopupSecondary.classList.remove("is-visible");
+}
+
 dog.addEventListener("pointerup", showNextPhrase);
 dog.addEventListener("touchend", showNextPhrase, { passive: false });
 dog.addEventListener("click", showNextPhrase);
@@ -178,4 +217,10 @@ demonSkillIcon.addEventListener("click", (event) => {
     const isActive = dogScene.classList.toggle("is-sukuna");
     demonSkillIcon.classList.toggle("is-active", isActive);
     demonSkillIcon.setAttribute("aria-pressed", String(isActive));
+
+    if (isActive) {
+        showDomainPopupSequence();
+    } else {
+        hideDomainPopups();
+    }
 });
