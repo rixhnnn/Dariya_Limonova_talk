@@ -484,6 +484,30 @@ body {
     animation: demon-part-in 0.5s ease forwards;
 }
 
+.dog-scene.is-sukuna .demon-arm-left {
+    animation: demon-left-hand-center 0.62s ease-out forwards;
+}
+
+.dog-scene.is-sukuna .demon-arm-right {
+    animation: demon-right-hand-center 0.62s ease-out forwards;
+}
+
+.dog-scene.is-sukuna .demon-palm::before {
+    animation: demon-finger-left-rotate 0.62s ease-out forwards;
+}
+
+.dog-scene.is-sukuna .demon-palm::after {
+    animation: demon-finger-right-rotate 0.62s ease-out forwards;
+}
+
+.dog-scene.is-sukuna .demon-arm-left .demon-palm {
+    animation: demon-left-palm-turn 0.62s ease-out forwards;
+}
+
+.dog-scene.is-sukuna .demon-arm-right .demon-palm {
+    animation: demon-right-palm-turn 0.62s ease-out forwards;
+}
+
 .dog-scene.is-sukuna .cheek-left,
 .dog-scene.is-sukuna .cheek-right,
 .dog-scene.is-sukuna .chin-line-left,
@@ -758,9 +782,6 @@ body {
 
 .demon-palm::before {
     left: 3px;
-    box-shadow:
-        8px -3px 0 -1px #f0b26a,
-        8px -3px 0 1px #4a1620;
 }
 
 .demon-palm::after {
@@ -1514,6 +1535,74 @@ body {
     100% {
         opacity: 1;
         filter: blur(0);
+    }
+}
+
+@keyframes demon-left-hand-center {
+    0% {
+        opacity: 0;
+        filter: blur(4px);
+        transform: rotate(24deg) translate(0, 14px);
+    }
+
+    100% {
+        opacity: 1;
+        filter: blur(0);
+        transform: rotate(8deg) translate(46px, 4px);
+    }
+}
+
+@keyframes demon-right-hand-center {
+    0% {
+        opacity: 0;
+        filter: blur(4px);
+        transform: rotate(-24deg) translate(0, 14px);
+    }
+
+    100% {
+        opacity: 1;
+        filter: blur(0);
+        transform: rotate(-8deg) translate(-46px, 4px);
+    }
+}
+
+@keyframes demon-left-palm-turn {
+    0% {
+        transform: translateX(-50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translateX(-50%) rotate(45deg);
+    }
+}
+
+@keyframes demon-right-palm-turn {
+    0% {
+        transform: translateX(-50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translateX(-50%) rotate(-45deg);
+    }
+}
+
+@keyframes demon-finger-left-rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(-30deg);
+    }
+}
+
+@keyframes demon-finger-right-rotate {
+    0% {
+        transform: rotate(8deg);
+    }
+
+    100% {
+        transform: rotate(30deg);
     }
 }
 
