@@ -135,7 +135,7 @@ function launchRocket() {
         });
         isRocketSequence = false;
         dog.disabled = false;
-    }, 3200);
+    }, 2400);
 }
 
 function showNextPhrase(event) {
@@ -217,25 +217,15 @@ function showDomainPopupSequence() {
 
     domainPopupTimer = setTimeout(() => {
         domainPopupPrimary.classList.remove("is-visible");
-        showDomainBackdrop();
+        showDomainBackdrop(randomPhrase);
     }, 1400);
-
-    domainSecondPopupTimer = setTimeout(() => {
-        domainPopupPrimary.textContent = randomPhrase;
-        domainPopupPrimary.offsetWidth;
-        domainPopupPrimary.classList.add("is-visible");
-    }, 1900);
-
-    domainPopupCleanupTimer = setTimeout(() => {
-        domainPopupPrimary.classList.remove("is-visible");
-    }, 4200);
 
     domainTextCleanupTimer = setTimeout(() => {
         domainPopupPrimary.textContent = "";
-    }, 4620);
+    }, 1800);
 }
 
-function showDomainBackdrop() {
+function showDomainBackdrop(randomPhrase) {
     const rect = dogScene.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
@@ -262,6 +252,13 @@ function showDomainBackdrop() {
         domainRiver.classList.add("is-visible");
         domainDryPeople.forEach((person) => person.classList.add("is-visible"));
         domainTomb.classList.add("is-visible");
+
+        domainSecondPopupTimer = setTimeout(() => {
+            domainPopupPrimary.textContent = randomPhrase;
+            domainPopupPrimary.offsetWidth;
+            domainPopupPrimary.classList.add("is-visible");
+        }, 2600);
+
         domainSlashTimer = setTimeout(() => {
             domainSlashes.classList.remove("is-active");
             domainSlashes.offsetWidth;
@@ -272,8 +269,16 @@ function showDomainBackdrop() {
                 domainDryPeople.forEach((person) => person.classList.remove("is-shaking"));
                 domainDryPeople.forEach((person) => person.classList.add("is-cut"));
             }, 9000);
-        }, 1450);
-    }, 4000);
+        }, 3900);
+
+        domainPopupCleanupTimer = setTimeout(() => {
+            domainPopupPrimary.classList.remove("is-visible");
+        }, 4300);
+
+        domainTextCleanupTimer = setTimeout(() => {
+            domainPopupPrimary.textContent = "";
+        }, 4620);
+    }, 3200);
 }
 
 function hideDomainPopups() {
