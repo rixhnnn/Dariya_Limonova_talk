@@ -31,7 +31,9 @@ let rocketTimer;
 let rocketCleanupTimer;
 let finalEffectTimer;
 let domainPopupTimer;
+let domainSecondPopupTimer;
 let domainPopupCleanupTimer;
+let domainTextCleanupTimer;
 let phraseIndex = 0;
 let isRocketSequence = false;
 let lastInteractionTime = 0;
@@ -176,34 +178,56 @@ function showNextPhrase(event) {
 
 function showDomainPopupSequence() {
     clearTimeout(domainPopupTimer);
+    clearTimeout(domainSecondPopupTimer);
     clearTimeout(domainPopupCleanupTimer);
+    clearTimeout(domainTextCleanupTimer);
+    clearTimeout(speechTimer);
+
+    speechBubble.classList.remove("is-visible");
+    dog.classList.remove("is-talking");
 
     const randomPhrase = domainPhrases[Math.floor(Math.random() * domainPhrases.length)];
 
-    domainPopupPrimary.textContent = "Ryoiki Tenkai";
-    domainPopupSecondary.textContent = randomPhrase;
     domainPopupPrimary.classList.remove("is-visible");
     domainPopupSecondary.classList.remove("is-visible");
+    domainPopupPrimary.textContent = "";
+    domainPopupSecondary.textContent = "";
 
     domainPopupPrimary.offsetWidth;
 
+    domainPopupPrimary.textContent = "Ryoiki Tenkai";
     domainPopupPrimary.classList.add("is-visible");
 
     domainPopupTimer = setTimeout(() => {
         domainPopupPrimary.classList.remove("is-visible");
-        domainPopupSecondary.classList.add("is-visible");
     }, 1400);
 
+    domainSecondPopupTimer = setTimeout(() => {
+        domainPopupPrimary.textContent = randomPhrase;
+        domainPopupPrimary.offsetWidth;
+        domainPopupPrimary.classList.add("is-visible");
+    }, 1900);
+
     domainPopupCleanupTimer = setTimeout(() => {
-        domainPopupSecondary.classList.remove("is-visible");
-    }, 3600);
+        domainPopupPrimary.classList.remove("is-visible");
+    }, 4200);
+
+    domainTextCleanupTimer = setTimeout(() => {
+        domainPopupPrimary.textContent = "";
+    }, 4620);
 }
 
 function hideDomainPopups() {
     clearTimeout(domainPopupTimer);
+    clearTimeout(domainSecondPopupTimer);
     clearTimeout(domainPopupCleanupTimer);
+    clearTimeout(domainTextCleanupTimer);
     domainPopupPrimary.classList.remove("is-visible");
     domainPopupSecondary.classList.remove("is-visible");
+    domainPopupPrimary.textContent = "";
+    domainPopupSecondary.textContent = "";
+    speechBubble.classList.remove("is-visible");
+    dog.classList.remove("is-talking");
 }
 
 dog.addEventListener("pointerup", showNextPhrase);
