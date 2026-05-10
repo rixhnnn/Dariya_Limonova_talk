@@ -2,6 +2,8 @@ const videoSrc = "img/489439949.webm";
 const grid = document.querySelector(".background-grid");
 const dog = document.querySelector(".dog");
 const speechBubble = document.querySelector(".speech-bubble");
+const dogScene = document.querySelector(".dog-scene");
+const demonSkillIcon = document.querySelector(".demon-skill-icon");
 const rocketLayer = document.querySelector(".rocket-layer");
 const littlePeople = document.querySelectorAll(".little-person");
 const phrases = [
@@ -168,3 +170,12 @@ function showNextPhrase(event) {
 dog.addEventListener("pointerup", showNextPhrase);
 dog.addEventListener("touchend", showNextPhrase, { passive: false });
 dog.addEventListener("click", showNextPhrase);
+
+demonSkillIcon.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const isActive = dogScene.classList.toggle("is-sukuna");
+    demonSkillIcon.classList.toggle("is-active", isActive);
+    demonSkillIcon.setAttribute("aria-pressed", String(isActive));
+});

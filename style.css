@@ -62,6 +62,69 @@ body {
     overflow: visible;
 }
 
+.demon-skill-icon {
+    position: absolute;
+    left: 42%;
+    top: 18%;
+    z-index: 6;
+    width: 34px;
+    height: 34px;
+    padding: 3px;
+    background:
+        linear-gradient(135deg, #2b0909, #070202 48%, #3b0d0d),
+        radial-gradient(circle at 50% 45%, rgba(255, 35, 18, 0.32), transparent 62%);
+    border: 1px solid #d39a3a;
+    cursor: pointer;
+    box-shadow:
+        0 0 0 1px #320707,
+        0 0 10px rgba(255, 36, 0, 0.55),
+        inset 0 0 8px rgba(0, 0, 0, 0.9);
+    clip-path: polygon(12% 0, 88% 0, 100% 12%, 100% 88%, 88% 100%, 12% 100%, 0 88%, 0 12%);
+    transform: translateX(-50%);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.demon-skill-icon.is-active {
+    box-shadow:
+        0 0 0 1px #f0bd61,
+        0 0 18px rgba(255, 28, 12, 0.9),
+        0 0 34px rgba(122, 0, 0, 0.8),
+        inset 0 0 8px rgba(0, 0, 0, 0.9);
+}
+
+.demon-skill-icon::before,
+.demon-skill-icon::after {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    pointer-events: none;
+    clip-path: inherit;
+}
+
+.demon-skill-icon::before {
+    border: 1px solid rgba(255, 48, 24, 0.7);
+    box-shadow: inset 0 0 0 1px rgba(255, 190, 80, 0.28);
+}
+
+.demon-skill-icon::after {
+    background:
+        linear-gradient(45deg, transparent 0 37%, rgba(255, 194, 86, 0.9) 38% 44%, transparent 45% 100%),
+        linear-gradient(-45deg, transparent 0 37%, rgba(255, 48, 24, 0.7) 38% 44%, transparent 45% 100%);
+    mix-blend-mode: screen;
+    opacity: 0.42;
+}
+
+.demon-skill-icon img {
+    position: relative;
+    z-index: 1;
+    width: 34px;
+    height: 34px;
+    display: block;
+    object-fit: cover;
+    clip-path: inherit;
+}
+
 .dog {
     position: absolute;
     left: 50%;
@@ -98,6 +161,319 @@ body {
     z-index: 2;
 }
 
+.sukuna-hair,
+.sukuna-mark {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sukuna-hair {
+    position: absolute;
+    bottom: 88%;
+    left: 50%;
+    width: 20px;
+    height: 58%;
+    background: transparent;
+    border-left: 1px solid #ff7fab;
+    border-radius: 70% 28% 0 0;
+    transform-origin: 50% 100%;
+    z-index: -2;
+    box-shadow:
+        3px 2px 0 -2px #ff9fbd,
+        -3px 3px 0 -2px #ff9fbd,
+        6px 6px 0 -2px #f04f86,
+        -6px 7px 0 -2px #f04f86,
+        2px 0 0 -1px #ff7fab,
+        -2px 1px 0 -1px #ff7fab,
+        4px 4px 0 -1px #ff9fbd,
+        -4px 5px 0 -1px #ff9fbd,
+        8px 10px 0 -2px #c83e72,
+        -8px 11px 0 -2px #c83e72;
+}
+
+.sukuna-hair::before,
+.sukuna-hair::after {
+    content: "";
+    position: absolute;
+    left: 3px;
+    bottom: 0;
+    width: 18px;
+    height: 88%;
+    background: transparent;
+    border-left: 1px solid #ff9fbd;
+    border-radius: 68% 32% 0 0;
+    transform-origin: 50% 100%;
+    box-shadow:
+        4px 3px 0 -3px #ff7fab,
+        -4px 4px 0 -3px #ff9fbd,
+        7px 8px 0 -4px #f04f86,
+        -7px 9px 0 -4px #c83e72;
+}
+
+.sukuna-hair::before {
+    transform: rotate(-18deg) skewX(-10deg);
+}
+
+.sukuna-hair::after {
+    height: 78%;
+    left: -4px;
+    border-left-color: #f04f86;
+    border-radius: 30% 70% 0 0;
+    transform: rotate(18deg) skewX(10deg);
+}
+
+.hair-one {
+    --hair-transform: translateX(-260%) rotate(-76deg) scaleY(0.82);
+    transform: var(--hair-transform);
+}
+
+.hair-two {
+    --hair-transform: translateX(-210%) rotate(-60deg) scaleY(0.92);
+    transform: var(--hair-transform);
+}
+
+.hair-three {
+    --hair-transform: translateX(-156%) rotate(-44deg) scaleY(1.02);
+    transform: var(--hair-transform);
+}
+
+.hair-four {
+    --hair-transform: translateX(-98%) rotate(-28deg) scaleY(1.12);
+    transform: var(--hair-transform);
+}
+
+.hair-five {
+    --hair-transform: translateX(-46%) rotate(-13deg) scaleY(1.2);
+    transform: var(--hair-transform);
+}
+
+.hair-six {
+    --hair-transform: translateX(-14%) rotate(-5deg) scaleY(1.24);
+    transform: var(--hair-transform);
+}
+
+.hair-seven {
+    --hair-transform: translateX(14%) rotate(5deg) scaleY(1.24);
+    transform: var(--hair-transform);
+}
+
+.hair-eight {
+    --hair-transform: translateX(46%) rotate(13deg) scaleY(1.2);
+    transform: var(--hair-transform);
+}
+
+.hair-nine {
+    --hair-transform: translateX(98%) rotate(28deg) scaleY(1.12);
+    transform: var(--hair-transform);
+}
+
+.hair-ten {
+    --hair-transform: translateX(156%) rotate(44deg) scaleY(1.02);
+    transform: var(--hair-transform);
+}
+
+.hair-eleven {
+    --hair-transform: translateX(210%) rotate(60deg) scaleY(0.92);
+    transform: var(--hair-transform);
+}
+
+.hair-twelve {
+    --hair-transform: translateX(260%) rotate(76deg) scaleY(0.82);
+    transform: var(--hair-transform);
+}
+
+.hair-thirteen {
+    --hair-transform: translateX(-2%) rotate(-13deg) scaleY(1.18);
+    bottom: 91%;
+    transform: var(--hair-transform);
+}
+
+.hair-fourteen {
+    --hair-transform: translateX(2%) rotate(13deg) scaleY(1.18);
+    bottom: 91%;
+    transform: var(--hair-transform);
+}
+
+.sukuna-mark {
+    position: absolute;
+    z-index: 3;
+    background: #1b0b11;
+}
+
+.forehead-mark {
+    left: 50%;
+    top: 19%;
+    width: 18%;
+    height: 24%;
+    clip-path: polygon(50% 0, 64% 34%, 100% 22%, 72% 55%, 82% 100%, 50% 70%, 18% 100%, 28% 55%, 0 22%, 36% 34%);
+    transform: translateX(-50%) scale(0.55);
+}
+
+.cheek-mark {
+    top: 50%;
+    width: 25%;
+    height: 4%;
+    border-radius: 999px;
+    box-shadow: 0 10px 0 #1b0b11, 0 -10px 0 #1b0b11;
+}
+
+.cheek-left {
+    left: 7%;
+    --mark-transform: rotate(24deg);
+    transform: var(--mark-transform) scaleX(0.55);
+}
+
+.cheek-right {
+    right: 7%;
+    --mark-transform: rotate(-24deg);
+    transform: var(--mark-transform) scaleX(0.55);
+}
+
+.chin-mark {
+    left: 50%;
+    bottom: 7%;
+    width: 13%;
+    height: 14%;
+    clip-path: polygon(50% 100%, 0 0, 100% 0);
+    transform: translateX(-50%) scale(0.55);
+}
+
+.chin-line {
+    bottom: 12%;
+    width: 14%;
+    height: 3%;
+    border-radius: 999px;
+}
+
+.chin-line-left {
+    left: 30%;
+    --mark-transform: rotate(-32deg);
+    transform: var(--mark-transform) scaleX(0.45);
+}
+
+.chin-line-right {
+    right: 30%;
+    --mark-transform: rotate(32deg);
+    transform: var(--mark-transform) scaleX(0.45);
+}
+
+.body-mark {
+    background: #1b0b11;
+    z-index: 3;
+}
+
+.body-line-one {
+    left: 17%;
+    top: 24%;
+    width: 27%;
+    height: 4%;
+    border-radius: 999px;
+    --mark-transform: rotate(24deg);
+    transform: var(--mark-transform) scaleX(0.45);
+}
+
+.body-line-two {
+    right: 15%;
+    top: 36%;
+    width: 30%;
+    height: 4%;
+    border-radius: 999px;
+    --mark-transform: rotate(-22deg);
+    transform: var(--mark-transform) scaleX(0.45);
+}
+
+.body-star-one,
+.body-star-two {
+    width: 13%;
+    height: 16%;
+    clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 56%, 80% 100%, 50% 72%, 20% 100%, 32% 56%, 2% 35%, 39% 35%);
+    transform: scale(0.55);
+}
+
+.body-star-one {
+    left: 23%;
+    top: 47%;
+}
+
+.body-star-two {
+    right: 20%;
+    top: 18%;
+}
+
+.body-rune {
+    left: 50%;
+    top: 23%;
+    width: 10%;
+    height: 22%;
+    border: 3px solid #1b0b11;
+    border-top: 0;
+    border-radius: 0 0 999px 999px;
+    background: transparent;
+    transform: translateX(-50%) scale(0.6);
+}
+
+.dog-scene.is-sukuna .dog-head {
+    background: #f0b26a;
+    border-color: #3d141a;
+    box-shadow:
+        0 0 22px rgba(145, 0, 0, 0.55),
+        inset 0 -12px 18px rgba(65, 12, 12, 0.22);
+}
+
+.dog-scene.is-sukuna .ear {
+    background: #4a1c20;
+    border-color: #2a0b10;
+}
+
+.dog-scene.is-sukuna .eye {
+    background: linear-gradient(145deg, #ff2633 0%, #b00012 62%, #3b0007 100%);
+    width: 16%;
+    height: 10%;
+    border-radius: 0;
+    clip-path: polygon(0 12%, 100% 0, 72% 100%, 14% 82%);
+    box-shadow:
+        0 0 12px rgba(255, 24, 24, 0.95),
+        inset 0 -4px 5px rgba(35, 0, 0, 0.55);
+    animation: none;
+}
+
+.dog-scene.is-sukuna .eye-left {
+    left: 25%;
+    transform: rotate(17deg);
+}
+
+.dog-scene.is-sukuna .eye-right {
+    right: 25%;
+    transform: scaleX(-1) rotate(17deg);
+}
+
+.dog-scene.is-sukuna .snout {
+    box-shadow: inset 0 8px 8px rgba(50, 6, 8, 0.18);
+}
+
+.dog-scene.is-sukuna .sukuna-hair {
+    animation: sukuna-hair-in 0.48s cubic-bezier(0.2, 0.9, 0.24, 1.18) forwards;
+}
+
+.dog-scene.is-sukuna .sukuna-mark {
+    animation: sukuna-mark-in 0.55s ease forwards;
+}
+
+.dog-scene.is-sukuna .cheek-left,
+.dog-scene.is-sukuna .cheek-right,
+.dog-scene.is-sukuna .chin-line-left,
+.dog-scene.is-sukuna .chin-line-right,
+.dog-scene.is-sukuna .body-line-one,
+.dog-scene.is-sukuna .body-line-two {
+    animation-name: sukuna-cheek-in;
+}
+
+.dog-scene.is-sukuna .balloon {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.65);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
 .ear {
     position: absolute;
     top: 8%;
@@ -122,12 +498,43 @@ body {
 
 .eye {
     position: absolute;
+    z-index: 6;
     top: 39%;
     width: 10%;
     height: 12%;
     background: #24130c;
     border-radius: 50%;
     animation: dog-blink 3.4s infinite;
+}
+
+.eye::before {
+    content: "";
+    position: absolute;
+    left: -45%;
+    top: -62%;
+    width: 190%;
+    height: 38%;
+    background: transparent;
+    border-radius: 999px;
+    transform-origin: 50% 50%;
+}
+
+.dog-scene.is-sukuna .eye::before {
+    left: -34%;
+    top: -112%;
+    width: 185%;
+    height: 52%;
+    background: #21070a;
+    border-radius: 999px;
+    box-shadow: 0 2px 0 rgba(80, 0, 0, 0.35);
+}
+
+.dog-scene.is-sukuna .eye-left::before {
+    transform: rotate(-34deg);
+}
+
+.dog-scene.is-sukuna .eye-right::before {
+    transform: rotate(34deg);
 }
 
 .eye-left {
@@ -200,6 +607,8 @@ body {
     background: #ffe0b2;
     border: 4px solid #6f3d1e;
     border-radius: 45%;
+    transform-origin: 50% 100%;
+    transition: bottom 0.32s ease, left 0.32s ease, right 0.32s ease;
 }
 
 .paw-left {
@@ -210,18 +619,76 @@ body {
     right: 16%;
 }
 
-.tail {
+.front-arm {
     position: absolute;
-    right: -20%;
-    top: 12%;
-    width: 36%;
-    height: 18%;
-    border: 5px solid #6f3d1e;
-    border-left: 0;
-    border-bottom: 0;
-    border-radius: 0 90% 0 0;
-    transform: rotate(24deg);
+    z-index: 4;
+    width: 13px;
+    height: 62px;
+    background: #8f5229;
+    border: 4px solid #6f3d1e;
+    border-radius: 999px;
+    transform-origin: 50% 100%;
 }
+
+.front-arm::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -15px;
+    width: 20px;
+    height: 25px;
+    background: #ffe0b2;
+    border: 3px solid #6f3d1e;
+    border-radius: 999px;
+    transform: translateX(-50%);
+    box-shadow: inset -3px -2px 0 rgba(111, 61, 30, 0.12);
+}
+
+.front-arm-left {
+    left: 11%;
+    top: 22%;
+    transform: rotate(18deg);
+}
+
+.front-arm-right {
+    right: -5%;
+    top: -6%;
+    transform: rotate(26deg);
+}
+
+.dog-scene.is-sukuna .front-arm {
+    background:
+        linear-gradient(135deg, transparent 0 34%, #1b0b11 35% 43%, transparent 44% 100%),
+        linear-gradient(45deg, transparent 0 55%, #1b0b11 56% 64%, transparent 65% 100%),
+        #8f5229;
+}
+
+.dog-scene.is-sukuna .front-arm::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 35%;
+    width: 150%;
+    height: 8%;
+    background: #1b0b11;
+    border-radius: 999px;
+    transform: translateX(-50%) rotate(-18deg);
+}
+
+.dog-scene.is-sukuna .front-arm::after {
+    background:
+        radial-gradient(circle at 50% 43%, #1b0b11 0 2px, transparent 2.4px),
+        linear-gradient(32deg, transparent 0 55%, #1b0b11 56% 64%, transparent 65% 100%),
+        #ffe0b2;
+}
+
+.dog-scene.is-sukuna .paw {
+    background:
+        linear-gradient(26deg, transparent 0 48%, #1b0b11 49% 55%, transparent 56% 100%),
+        linear-gradient(-24deg, transparent 0 55%, #1b0b11 56% 62%, transparent 63% 100%),
+        #ffe0b2;
+}
+
 
 .balloon {
     position: absolute;
@@ -842,6 +1309,42 @@ body {
 
     47% {
         transform: scaleY(0.08);
+    }
+}
+
+@keyframes sukuna-hair-in {
+    0% {
+        opacity: 0;
+        transform: var(--hair-transform) translateY(18px) scale(0.55);
+    }
+
+    100% {
+        opacity: 1;
+        transform: var(--hair-transform) translateY(0) scale(1);
+    }
+}
+
+@keyframes sukuna-mark-in {
+    0% {
+        opacity: 0;
+        filter: blur(5px);
+    }
+
+    100% {
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+@keyframes sukuna-cheek-in {
+    0% {
+        opacity: 0;
+        transform: var(--mark-transform) scaleX(0.45);
+    }
+
+    100% {
+        opacity: 1;
+        transform: var(--mark-transform) scaleX(1);
     }
 }
 
