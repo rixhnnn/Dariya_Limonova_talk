@@ -144,6 +144,10 @@ body {
     animation: domain-river-fill 1.65s ease-out forwards;
 }
 
+.domain-river.is-exiting {
+    animation: domain-river-exit 1.65s ease-in forwards;
+}
+
 .domain-slashes {
     position: fixed;
     left: 50%;
@@ -428,6 +432,10 @@ body {
 .domain-dry-person.is-cut {
     opacity: 1;
     transform: translate(-50%, 0) scale(1);
+}
+
+.domain-dry-person.is-exiting {
+    animation: dry-person-exit 1.35s ease-in forwards;
 }
 
 .domain-dry-person.is-cut::after {
@@ -908,6 +916,10 @@ body {
     animation: tomb-rise 1.9s cubic-bezier(0.16, 0.84, 0.24, 1) forwards;
 }
 
+.domain-tomb.is-visible.is-exiting {
+    animation: tomb-exit 1.75s cubic-bezier(0.76, 0, 0.84, 0.22) forwards;
+}
+
 .tomb-roof,
 .tomb-body,
 .tomb-gate,
@@ -1197,65 +1209,70 @@ body {
 
 .demon-skill-icon {
     position: absolute;
-    left: 42%;
-    top: 18%;
+    left: -18%;
+    top: 42%;
     z-index: 6;
-    width: 34px;
-    height: 34px;
-    padding: 3px;
-    background:
-        linear-gradient(135deg, #2b0909, #070202 48%, #3b0d0d),
-        radial-gradient(circle at 50% 45%, rgba(255, 35, 18, 0.32), transparent 62%);
-    border: 1px solid #d39a3a;
+    width: 156px;
+    min-height: 54px;
+    padding: 11px 18px;
+    background: #fff7df;
+    border: 4px solid #25120b;
+    border-radius: 999px / 72%;
+    color: #25120b;
     cursor: pointer;
     box-shadow:
-        0 0 0 1px #320707,
-        0 0 10px rgba(255, 36, 0, 0.55),
-        inset 0 0 8px rgba(0, 0, 0, 0.9);
-    clip-path: polygon(12% 0, 88% 0, 100% 12%, 100% 88%, 88% 100%, 12% 100%, 0 88%, 0 12%);
+        0 8px 0 #25120b,
+        0 14px 18px rgba(0, 0, 0, 0.26);
+    font-size: 15px;
+    font-weight: 950;
+    line-height: 1.05;
+    letter-spacing: 0.04em;
+    text-align: center;
+    text-transform: uppercase;
     transform: translateX(-50%);
+    transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
 }
 
 .demon-skill-icon.is-active {
+    background: #ffe2e2;
+    color: #8b0000;
+    transform: translateX(-50%) translateY(5px);
     box-shadow:
-        0 0 0 1px #f0bd61,
-        0 0 18px rgba(255, 28, 12, 0.9),
-        0 0 34px rgba(122, 0, 0, 0.8),
-        inset 0 0 8px rgba(0, 0, 0, 0.9);
+        0 3px 0 #25120b,
+        0 0 18px rgba(255, 28, 12, 0.55);
+}
+
+.demon-skill-icon.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) scale(0.86);
+}
+
+.demon-skill-icon.is-active.is-hidden {
+    transform: translateX(-50%) scale(0.86);
 }
 
 .demon-skill-icon::before,
 .demon-skill-icon::after {
     content: "";
     position: absolute;
-    inset: -3px;
     pointer-events: none;
-    clip-path: inherit;
 }
 
 .demon-skill-icon::before {
-    border: 1px solid rgba(255, 48, 24, 0.7);
-    box-shadow: inset 0 0 0 1px rgba(255, 190, 80, 0.28);
+    inset: 7px;
+    border: 2px solid rgba(37, 18, 11, 0.16);
+    border-radius: inherit;
 }
 
 .demon-skill-icon::after {
-    background:
-        linear-gradient(45deg, transparent 0 37%, rgba(255, 194, 86, 0.9) 38% 44%, transparent 45% 100%),
-        linear-gradient(-45deg, transparent 0 37%, rgba(255, 48, 24, 0.7) 38% 44%, transparent 45% 100%);
-    mix-blend-mode: screen;
-    opacity: 0.42;
-}
-
-.demon-skill-icon img {
-    position: relative;
-    z-index: 1;
-    width: 34px;
-    height: 34px;
-    display: block;
-    object-fit: cover;
-    clip-path: inherit;
+    inset: 7px 13px auto auto;
+    width: 16px;
+    height: 8px;
+    border-top: 3px solid rgba(37, 18, 11, 0.28);
+    border-radius: 50%;
 }
 
 .dog {
@@ -1277,6 +1294,10 @@ body {
 .dog-scene.is-sukuna.is-on-tomb .dog {
     z-index: 5;
     animation: sukuna-rise-to-tomb 1.9s cubic-bezier(0.16, 0.84, 0.24, 1) forwards;
+}
+
+.dog-scene.is-sukuna.is-on-tomb.is-domain-exiting .dog {
+    animation: sukuna-return-from-tomb 1.75s cubic-bezier(0.76, 0, 0.84, 0.22) forwards;
 }
 
 .dog:focus-visible {
@@ -2849,6 +2870,20 @@ body {
     }
 }
 
+@keyframes domain-river-exit {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(34%);
+        filter: blur(4px);
+    }
+}
+
 @keyframes dry-person-in {
     0% {
         opacity: 0;
@@ -2860,6 +2895,18 @@ body {
         opacity: 1;
         transform: translate(-50%, 0) scale(1);
         filter: none;
+    }
+}
+
+@keyframes dry-person-exit {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, 0) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, 32px) scale(0.82);
     }
 }
 
@@ -3111,6 +3158,20 @@ body {
     }
 }
 
+@keyframes tomb-exit {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, 0) scale(1);
+        filter: blur(0) drop-shadow(0 20px 30px rgba(0, 0, 0, 0.75));
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, 44%) scale(0.68);
+        filter: blur(8px) drop-shadow(0 20px 30px rgba(0, 0, 0, 0.75));
+    }
+}
+
 @keyframes sukuna-rise-to-tomb {
     0% {
         transform: translateX(-50%) translateY(0) scale(1);
@@ -3127,6 +3188,22 @@ body {
     }
 }
 
+@keyframes sukuna-return-from-tomb {
+    0% {
+        transform: translateX(-50%) translateY(-126%) scale(0.72);
+        filter: drop-shadow(0 16px 18px rgba(0, 0, 0, 0.68));
+    }
+
+    65% {
+        transform: translateX(-50%) translateY(-18%) scale(0.98);
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(0) scale(1);
+        filter: drop-shadow(0 12px 14px rgba(0, 0, 0, 0.45));
+    }
+}
+
 @keyframes sukuna-rise-to-tomb-mobile {
     0% {
         transform: translateX(-50%) translateY(0) scale(1);
@@ -3140,6 +3217,22 @@ body {
     100% {
         transform: translateX(-50%) translateY(-104%) scale(0.68);
         filter: drop-shadow(0 16px 18px rgba(0, 0, 0, 0.68));
+    }
+}
+
+@keyframes sukuna-return-from-tomb-mobile {
+    0% {
+        transform: translateX(-50%) translateY(-104%) scale(0.68);
+        filter: drop-shadow(0 16px 18px rgba(0, 0, 0, 0.68));
+    }
+
+    65% {
+        transform: translateX(-50%) translateY(-14%) scale(0.98);
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(0) scale(1);
+        filter: drop-shadow(0 12px 14px rgba(0, 0, 0, 0.45));
     }
 }
 
@@ -3257,6 +3350,10 @@ body {
 
     .dog-scene.is-sukuna.is-on-tomb .dog {
         animation-name: sukuna-rise-to-tomb-mobile;
+    }
+
+    .dog-scene.is-sukuna.is-on-tomb.is-domain-exiting .dog {
+        animation-name: sukuna-return-from-tomb-mobile;
     }
 
     .people-crowd {

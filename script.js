@@ -14,7 +14,7 @@ const demonSkillIcon = document.querySelector(".demon-skill-icon");
 const rocketLayer = document.querySelector(".rocket-layer");
 const littlePeople = document.querySelectorAll(".little-person");
 const domainPhrases = [
-    "Цыганская резня бензопилой",
+    "ГРОБНИЦА ДЫРЯВЫХ ДЕТЕЙ",
 ];
 const phrases = [
     "Пошли на хуй, бабки ебаные",
@@ -42,6 +42,7 @@ let domainTextCleanupTimer;
 let domainBackdropTimer;
 let domainSlashTimer;
 let domainSlashCleanupTimer;
+let domainResetTimer;
 let phraseIndex = 0;
 let isRocketSequence = false;
 let lastInteractionTime = 0;
@@ -192,10 +193,12 @@ function showDomainPopupSequence() {
     clearTimeout(domainBackdropTimer);
     clearTimeout(domainSlashTimer);
     clearTimeout(domainSlashCleanupTimer);
+    clearTimeout(domainResetTimer);
     clearTimeout(speechTimer);
 
     speechBubble.classList.remove("is-visible");
     dog.classList.remove("is-talking");
+    demonSkillIcon.classList.add("is-hidden");
     domainRiver.classList.remove("is-visible");
     domainSlashes.classList.remove("is-active");
     domainDryPeople.forEach((person) => person.classList.remove("is-visible"));
@@ -268,6 +271,7 @@ function showDomainBackdrop(randomPhrase) {
                 domainSlashes.classList.remove("is-active");
                 domainDryPeople.forEach((person) => person.classList.remove("is-shaking"));
                 domainDryPeople.forEach((person) => person.classList.add("is-cut"));
+                domainResetTimer = setTimeout(startDomainExit, 1800);
             }, 9000);
         }, 3900);
 
@@ -289,6 +293,7 @@ function hideDomainPopups() {
     clearTimeout(domainBackdropTimer);
     clearTimeout(domainSlashTimer);
     clearTimeout(domainSlashCleanupTimer);
+    clearTimeout(domainResetTimer);
     domainPopupPrimary.classList.remove("is-visible");
     domainPopupSecondary.classList.remove("is-visible");
     domainPopupPrimary.textContent = "";
@@ -298,9 +303,30 @@ function hideDomainPopups() {
     domainSlashes.classList.remove("is-active");
     domainDryPeople.forEach((person) => person.classList.remove("is-shaking", "is-cut", "is-visible"));
     domainTomb.classList.remove("is-visible");
-    dogScene.classList.remove("is-on-tomb");
+    dogScene.classList.remove("is-on-tomb", "is-domain-exiting");
+    demonSkillIcon.classList.remove("is-hidden");
     speechBubble.classList.remove("is-visible");
     dog.classList.remove("is-talking");
+}
+
+function resetDomainScene() {
+    hideDomainPopups();
+    dogScene.classList.remove("is-sukuna");
+    demonSkillIcon.classList.remove("is-active");
+    demonSkillIcon.setAttribute("aria-pressed", "false");
+}
+
+function startDomainExit() {
+    dogScene.classList.add("is-domain-exiting");
+    domainTomb.classList.add("is-exiting");
+    domainRiver.classList.add("is-exiting");
+    domainDryPeople.forEach((person) => person.classList.add("is-exiting"));
+    domainResetTimer = setTimeout(() => {
+        domainTomb.classList.remove("is-exiting");
+        domainRiver.classList.remove("is-exiting");
+        domainDryPeople.forEach((person) => person.classList.remove("is-exiting"));
+        resetDomainScene();
+    }, 1900);
 }
 
 dog.addEventListener("pointerup", showNextPhrase);
