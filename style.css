@@ -1209,8 +1209,8 @@ body {
 
 .demon-skill-icon {
     position: absolute;
-    left: -18%;
-    top: 42%;
+    left: 11%;
+    top: -11%;
     z-index: 6;
     width: 156px;
     min-height: 54px;
