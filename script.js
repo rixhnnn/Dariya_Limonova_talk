@@ -6,6 +6,9 @@ const domainPopupPrimary = document.querySelector(".domain-popup-primary");
 const domainPopupSecondary = document.querySelector(".domain-popup-secondary");
 const dogScene = document.querySelector(".dog-scene");
 const domainBackdrop = document.querySelector(".domain-backdrop");
+const domainRiver = document.querySelector(".domain-river");
+const domainSlashes = document.querySelector(".domain-slashes");
+const domainDryPeople = document.querySelectorAll(".domain-dry-person");
 const domainTomb = document.querySelector(".domain-tomb");
 const demonSkillIcon = document.querySelector(".demon-skill-icon");
 const rocketLayer = document.querySelector(".rocket-layer");
@@ -37,6 +40,8 @@ let domainSecondPopupTimer;
 let domainPopupCleanupTimer;
 let domainTextCleanupTimer;
 let domainBackdropTimer;
+let domainSlashTimer;
+let domainSlashCleanupTimer;
 let phraseIndex = 0;
 let isRocketSequence = false;
 let lastInteractionTime = 0;
@@ -185,10 +190,15 @@ function showDomainPopupSequence() {
     clearTimeout(domainPopupCleanupTimer);
     clearTimeout(domainTextCleanupTimer);
     clearTimeout(domainBackdropTimer);
+    clearTimeout(domainSlashTimer);
+    clearTimeout(domainSlashCleanupTimer);
     clearTimeout(speechTimer);
 
     speechBubble.classList.remove("is-visible");
     dog.classList.remove("is-talking");
+    domainRiver.classList.remove("is-visible");
+    domainSlashes.classList.remove("is-active");
+    domainDryPeople.forEach((person) => person.classList.remove("is-visible"));
     domainTomb.classList.remove("is-visible");
     dogScene.classList.remove("is-on-tomb");
 
@@ -238,10 +248,27 @@ function showDomainBackdrop() {
     domainBackdropTimer = setTimeout(() => {
         dogScene.classList.remove("is-on-tomb");
         domainTomb.classList.remove("is-visible");
+        domainRiver.classList.remove("is-visible");
+        domainSlashes.classList.remove("is-active");
+        domainDryPeople.forEach((person) => person.classList.remove("is-visible"));
         dogScene.offsetWidth;
         domainTomb.offsetWidth;
+        domainRiver.offsetWidth;
+        domainDryPeople.forEach((person) => {
+            person.offsetWidth;
+        });
         dogScene.classList.add("is-on-tomb");
+        domainRiver.classList.add("is-visible");
+        domainDryPeople.forEach((person) => person.classList.add("is-visible"));
         domainTomb.classList.add("is-visible");
+        domainSlashTimer = setTimeout(() => {
+            domainSlashes.classList.remove("is-active");
+            domainSlashes.offsetWidth;
+            domainSlashes.classList.add("is-active");
+            domainSlashCleanupTimer = setTimeout(() => {
+                domainSlashes.classList.remove("is-active");
+            }, 9000);
+        }, 1450);
     }, 4000);
 }
 
@@ -251,11 +278,16 @@ function hideDomainPopups() {
     clearTimeout(domainPopupCleanupTimer);
     clearTimeout(domainTextCleanupTimer);
     clearTimeout(domainBackdropTimer);
+    clearTimeout(domainSlashTimer);
+    clearTimeout(domainSlashCleanupTimer);
     domainPopupPrimary.classList.remove("is-visible");
     domainPopupSecondary.classList.remove("is-visible");
     domainPopupPrimary.textContent = "";
     domainPopupSecondary.textContent = "";
     domainBackdrop.classList.remove("is-active");
+    domainRiver.classList.remove("is-visible");
+    domainSlashes.classList.remove("is-active");
+    domainDryPeople.forEach((person) => person.classList.remove("is-visible"));
     domainTomb.classList.remove("is-visible");
     dogScene.classList.remove("is-on-tomb");
     speechBubble.classList.remove("is-visible");
