@@ -419,6 +419,55 @@ body {
     animation: dry-person-in 1.1s ease-out 0.35s forwards;
 }
 
+.domain-dry-person.is-visible.is-shaking {
+    animation:
+        dry-person-in 1.1s ease-out 0.35s forwards,
+        dry-person-shake 0.12s linear 0.35s infinite;
+}
+
+.domain-dry-person.is-cut {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+}
+
+.domain-dry-person.is-cut::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -12px;
+    z-index: 0;
+    width: 128px;
+    height: 42px;
+    background:
+        radial-gradient(circle at 12% 46%, rgba(230, 0, 0, 0.88) 0 5px, transparent 6px),
+        radial-gradient(circle at 88% 58%, rgba(150, 0, 0, 0.86) 0 6px, transparent 7px),
+        radial-gradient(circle at 72% 18%, rgba(210, 0, 0, 0.78) 0 4px, transparent 5px),
+        radial-gradient(ellipse at 30% 52%, rgba(190, 0, 0, 0.96) 0 42%, transparent 43%),
+        radial-gradient(ellipse at 64% 58%, rgba(95, 0, 0, 0.94) 0 38%, transparent 39%),
+        radial-gradient(ellipse at 52% 44%, rgba(150, 0, 0, 0.95) 0 48%, transparent 49%);
+    border-radius: 50%;
+    transform: translateX(-50%) scale(0.95);
+    filter: drop-shadow(0 0 10px rgba(120, 0, 0, 0.85));
+}
+
+.domain-dry-person.is-cut::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -18px;
+    z-index: 0;
+    width: 170px;
+    height: 34px;
+    background:
+        radial-gradient(circle at 8% 62%, rgba(130, 0, 0, 0.8) 0 4px, transparent 5px),
+        radial-gradient(circle at 22% 34%, rgba(210, 0, 0, 0.88) 0 3px, transparent 4px),
+        radial-gradient(circle at 76% 68%, rgba(170, 0, 0, 0.82) 0 5px, transparent 6px),
+        radial-gradient(circle at 94% 44%, rgba(120, 0, 0, 0.78) 0 3px, transparent 4px),
+        radial-gradient(ellipse at 50% 50%, rgba(80, 0, 0, 0.78) 0 48%, transparent 50%);
+    border-radius: 50%;
+    transform: translateX(-50%);
+}
+
 .dry-person-head,
 .dry-person-hair,
 .dry-person-body,
@@ -489,6 +538,130 @@ body {
     border-radius: 18px 18px 10px 10px;
     transform: translateX(-50%);
     z-index: 2;
+}
+
+.dry-person-body::before,
+.dry-person-body::after {
+    content: "";
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.dry-person-body::before {
+    left: 10%;
+    top: 18%;
+    width: 82%;
+    height: 58%;
+    background:
+        linear-gradient(32deg, transparent 0 45%, rgba(160, 0, 0, 0.95) 46% 54%, transparent 55% 100%),
+        radial-gradient(circle at 22% 62%, #b30000 0 4px, transparent 5px),
+        radial-gradient(circle at 70% 34%, #760000 0 3px, transparent 4px);
+    border-radius: 12px;
+}
+
+.dry-person-body::after {
+    right: 6%;
+    bottom: 9%;
+    width: 18px;
+    height: 22px;
+    background:
+        radial-gradient(circle at 50% 18%, #d50000 0 4px, transparent 5px),
+        radial-gradient(circle at 38% 58%, #8f0000 0 3px, transparent 4px),
+        radial-gradient(circle at 68% 76%, #b00000 0 3px, transparent 4px);
+}
+
+.domain-dry-person.is-shaking .dry-person-body::before,
+.domain-dry-person.is-shaking .dry-person-body::after {
+    opacity: 1;
+    animation: cut-mark-flicker 0.22s linear infinite;
+}
+
+.domain-dry-person.is-shaking .dry-person-head {
+    box-shadow:
+        inset 8px -4px 0 rgba(120, 0, 0, 0.28),
+        0 0 0 1px rgba(150, 0, 0, 0.4);
+}
+
+.domain-dry-person.is-shaking .dry-person-head {
+    animation: dry-head-separate 0.42s steps(2, end) infinite;
+}
+
+.domain-dry-person.is-shaking .dry-person-body {
+    animation: dry-body-jolt 0.18s linear infinite;
+}
+
+.domain-dry-person.is-shaking .arm-left {
+    animation: dry-left-arm-separate 0.2s linear infinite;
+}
+
+.domain-dry-person.is-shaking .arm-right {
+    animation: dry-right-arm-separate 0.2s linear infinite;
+}
+
+.domain-dry-person.is-shaking .leg-left {
+    animation: dry-left-leg-separate 0.24s linear infinite;
+}
+
+.domain-dry-person.is-shaking .leg-right {
+    animation: dry-right-leg-separate 0.24s linear infinite;
+}
+
+.dry-person-woman.is-shaking .arm-left {
+    animation-name: dry-woman-left-arm-separate;
+}
+
+.dry-person-woman.is-shaking .arm-right {
+    animation-name: dry-woman-right-arm-separate;
+}
+
+.dry-person-child.is-shaking .arm-left,
+.dry-person-child.is-shaking .arm-right,
+.dry-person-child.is-shaking .leg-left,
+.dry-person-child.is-shaking .leg-right {
+    animation-duration: 0.18s;
+}
+
+.domain-dry-person.is-cut .dry-person-head {
+    animation: dry-cut-head-fall 0.48s ease-out forwards;
+}
+
+.domain-dry-person.is-cut .dry-person-body {
+    animation: dry-cut-body-fall 0.5s ease-out forwards;
+}
+
+.domain-dry-person.is-cut .arm-left {
+    animation: dry-cut-left-arm-fall 0.48s ease-out forwards;
+}
+
+.domain-dry-person.is-cut .arm-right {
+    animation: dry-cut-right-arm-fall 0.48s ease-out forwards;
+}
+
+.domain-dry-person.is-cut .leg-left {
+    animation: dry-cut-left-leg-fall 0.52s ease-out forwards;
+}
+
+.domain-dry-person.is-cut .leg-right {
+    animation: dry-cut-right-leg-fall 0.52s ease-out forwards;
+}
+
+.dry-person-woman.is-cut .arm-left {
+    animation-name: dry-cut-woman-left-arm-fall;
+}
+
+.dry-person-woman.is-cut .arm-right {
+    animation-name: dry-cut-woman-right-arm-fall;
+}
+
+.dry-person-child.is-cut::after {
+    width: 92px;
+    height: 30px;
+}
+
+.dry-person-child.is-cut::before {
+    width: 118px;
+    height: 24px;
 }
 
 .dry-person-sash {
@@ -2687,6 +2860,210 @@ body {
         opacity: 1;
         transform: translate(-50%, 0) scale(1);
         filter: none;
+    }
+}
+
+@keyframes dry-person-shake {
+    0% {
+        transform: translate(-50%, 0) scale(1) rotate(0deg);
+    }
+
+    25% {
+        transform: translate(calc(-50% - 2px), 1px) scale(1) rotate(-1.4deg);
+    }
+
+    50% {
+        transform: translate(calc(-50% + 2px), -1px) scale(1) rotate(1.2deg);
+    }
+
+    75% {
+        transform: translate(calc(-50% - 1px), 0) scale(1) rotate(-0.8deg);
+    }
+
+    100% {
+        transform: translate(-50%, 0) scale(1) rotate(0deg);
+    }
+}
+
+@keyframes cut-mark-flicker {
+    0%,
+    100% {
+        filter: brightness(1);
+    }
+
+    50% {
+        filter: brightness(1.45);
+    }
+}
+
+@keyframes dry-head-separate {
+    0% {
+        transform: translateX(-50%) translate(0, 0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateX(-50%) translate(3px, -6px) rotate(4deg);
+    }
+
+    100% {
+        transform: translateX(-50%) translate(-2px, -4px) rotate(-3deg);
+    }
+}
+
+@keyframes dry-body-jolt {
+    0%,
+    100% {
+        transform: translateX(-50%) translate(0, 0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateX(-50%) translate(1px, 1px) rotate(0.8deg);
+    }
+}
+
+@keyframes dry-left-arm-separate {
+    0%,
+    100% {
+        transform: translate(-3px, 0) rotate(18deg);
+    }
+
+    50% {
+        transform: translate(-10px, 4px) rotate(42deg);
+    }
+}
+
+@keyframes dry-right-arm-separate {
+    0%,
+    100% {
+        transform: translate(3px, 0) rotate(-18deg);
+    }
+
+    50% {
+        transform: translate(10px, 4px) rotate(-42deg);
+    }
+}
+
+@keyframes dry-woman-left-arm-separate {
+    0%,
+    100% {
+        transform: translate(-3px, 0) rotate(30deg);
+    }
+
+    50% {
+        transform: translate(-11px, 5px) rotate(54deg);
+    }
+}
+
+@keyframes dry-woman-right-arm-separate {
+    0%,
+    100% {
+        transform: translate(3px, 0) rotate(-30deg);
+    }
+
+    50% {
+        transform: translate(11px, 5px) rotate(-54deg);
+    }
+}
+
+@keyframes dry-left-leg-separate {
+    0%,
+    100% {
+        transform: translate(-2px, 0) rotate(5deg);
+    }
+
+    50% {
+        transform: translate(-7px, 7px) rotate(18deg);
+    }
+}
+
+@keyframes dry-right-leg-separate {
+    0%,
+    100% {
+        transform: translate(2px, 0) rotate(-5deg);
+    }
+
+    50% {
+        transform: translate(7px, 7px) rotate(-18deg);
+    }
+}
+
+@keyframes dry-cut-head-fall {
+    0% {
+        transform: translateX(-50%) translate(0, -4px) rotate(0deg);
+    }
+
+    100% {
+        transform: translateX(-50%) translate(21px, 72px) rotate(92deg);
+    }
+}
+
+@keyframes dry-cut-body-fall {
+    0% {
+        transform: translateX(-50%) translate(0, 0) rotate(0deg);
+    }
+
+    100% {
+        transform: translateX(-50%) translate(-5px, 42px) rotate(-78deg);
+    }
+}
+
+@keyframes dry-cut-left-arm-fall {
+    0% {
+        transform: translate(-10px, 4px) rotate(42deg);
+    }
+
+    100% {
+        transform: translate(-33px, 54px) rotate(126deg);
+    }
+}
+
+@keyframes dry-cut-right-arm-fall {
+    0% {
+        transform: translate(10px, 4px) rotate(-42deg);
+    }
+
+    100% {
+        transform: translate(34px, 56px) rotate(-126deg);
+    }
+}
+
+@keyframes dry-cut-woman-left-arm-fall {
+    0% {
+        transform: translate(-11px, 5px) rotate(54deg);
+    }
+
+    100% {
+        transform: translate(-36px, 58px) rotate(136deg);
+    }
+}
+
+@keyframes dry-cut-woman-right-arm-fall {
+    0% {
+        transform: translate(11px, 5px) rotate(-54deg);
+    }
+
+    100% {
+        transform: translate(36px, 58px) rotate(-136deg);
+    }
+}
+
+@keyframes dry-cut-left-leg-fall {
+    0% {
+        transform: translate(-7px, 7px) rotate(18deg);
+    }
+
+    100% {
+        transform: translate(-20px, 34px) rotate(72deg);
+    }
+}
+
+@keyframes dry-cut-right-leg-fall {
+    0% {
+        transform: translate(7px, 7px) rotate(-18deg);
+    }
+
+    100% {
+        transform: translate(20px, 34px) rotate(-72deg);
     }
 }
 

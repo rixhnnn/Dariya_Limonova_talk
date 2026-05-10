@@ -199,6 +199,7 @@ function showDomainPopupSequence() {
     domainRiver.classList.remove("is-visible");
     domainSlashes.classList.remove("is-active");
     domainDryPeople.forEach((person) => person.classList.remove("is-visible"));
+    domainDryPeople.forEach((person) => person.classList.remove("is-shaking", "is-cut"));
     domainTomb.classList.remove("is-visible");
     dogScene.classList.remove("is-on-tomb");
 
@@ -250,7 +251,7 @@ function showDomainBackdrop() {
         domainTomb.classList.remove("is-visible");
         domainRiver.classList.remove("is-visible");
         domainSlashes.classList.remove("is-active");
-        domainDryPeople.forEach((person) => person.classList.remove("is-visible"));
+        domainDryPeople.forEach((person) => person.classList.remove("is-visible", "is-shaking", "is-cut"));
         dogScene.offsetWidth;
         domainTomb.offsetWidth;
         domainRiver.offsetWidth;
@@ -265,8 +266,11 @@ function showDomainBackdrop() {
             domainSlashes.classList.remove("is-active");
             domainSlashes.offsetWidth;
             domainSlashes.classList.add("is-active");
+            domainDryPeople.forEach((person) => person.classList.add("is-shaking"));
             domainSlashCleanupTimer = setTimeout(() => {
                 domainSlashes.classList.remove("is-active");
+                domainDryPeople.forEach((person) => person.classList.remove("is-shaking"));
+                domainDryPeople.forEach((person) => person.classList.add("is-cut"));
             }, 9000);
         }, 1450);
     }, 4000);
@@ -287,7 +291,7 @@ function hideDomainPopups() {
     domainBackdrop.classList.remove("is-active");
     domainRiver.classList.remove("is-visible");
     domainSlashes.classList.remove("is-active");
-    domainDryPeople.forEach((person) => person.classList.remove("is-visible"));
+    domainDryPeople.forEach((person) => person.classList.remove("is-shaking", "is-cut", "is-visible"));
     domainTomb.classList.remove("is-visible");
     dogScene.classList.remove("is-on-tomb");
     speechBubble.classList.remove("is-visible");
