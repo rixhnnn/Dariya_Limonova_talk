@@ -97,6 +97,106 @@
                 ПРИЗВАТЬ ШИКИГАМИ
             </button>
 
+            <div class="shikigami-summon" aria-hidden="true">
+                <svg class="shikigami-svg" viewBox="0 0 320 420" role="img" focusable="false">
+                    <defs>
+                        <linearGradient id="shiki-white" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#ffffff"/>
+                            <stop offset="42%" stop-color="#d8dde1"/>
+                            <stop offset="62%" stop-color="#ffffff"/>
+                            <stop offset="100%" stop-color="#7c8590"/>
+                        </linearGradient>
+                        <linearGradient id="shiki-dark" x1="18%" y1="0%" x2="82%" y2="100%">
+                            <stop offset="0%" stop-color="#08090d"/>
+                            <stop offset="35%" stop-color="#242936"/>
+                            <stop offset="72%" stop-color="#050508"/>
+                            <stop offset="100%" stop-color="#1b202b"/>
+                        </linearGradient>
+                        <linearGradient id="shiki-mouth" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#7b2d24"/>
+                            <stop offset="35%" stop-color="#13080b"/>
+                            <stop offset="100%" stop-color="#020204"/>
+                        </linearGradient>
+                    </defs>
+
+                    <path class="shiki-part shiki-tail" d="M154 220 C143 260 127 282 118 318 C107 363 134 395 174 390 C213 385 233 361 218 342 C206 326 181 340 169 354 C179 326 204 306 199 272 C195 244 176 228 154 220 Z"/>
+                    <path class="shiki-part shiki-tail-light" d="M169 234 C155 274 152 322 169 365"/>
+
+                    <path class="shiki-part shiki-body" d="M117 190 C92 216 83 256 101 287 C118 318 181 321 204 288 C226 257 216 216 190 190 C170 171 137 171 117 190 Z"/>
+                    <path class="shiki-line" d="M109 222 C128 213 177 214 197 224"/>
+                    <path class="shiki-line" d="M101 242 C126 232 183 234 207 246"/>
+                    <path class="shiki-line" d="M103 263 C130 253 179 255 204 266"/>
+                    <path class="shiki-line" d="M118 284 C138 276 166 277 188 286"/>
+
+                    <path class="shiki-part shiki-left-arm" d="M103 206 C70 224 54 258 47 303 C43 329 61 342 80 327 C94 316 91 290 101 267 C110 247 127 234 137 222 Z"/>
+                    <path class="shiki-part shiki-right-arm" d="M204 206 C239 219 264 250 273 294 C279 325 260 340 238 326 C222 316 224 291 214 267 C206 248 192 235 181 222 Z"/>
+                    <path class="shiki-part shiki-left-hand" d="M43 302 C33 321 34 344 51 346 C62 347 66 333 70 318 C74 335 83 345 94 338 C106 330 100 312 92 296 C77 304 61 306 43 302 Z"/>
+                    <path class="shiki-part shiki-right-hand" d="M272 292 C287 309 292 336 276 343 C265 347 257 333 250 317 C250 336 244 348 231 342 C218 336 220 315 229 296 C244 302 258 301 272 292 Z"/>
+
+                    <path class="shiki-claw" d="M43 331 L20 366"/>
+                    <path class="shiki-claw" d="M61 337 L50 379"/>
+                    <path class="shiki-claw" d="M82 331 L90 369"/>
+                    <path class="shiki-claw" d="M249 332 L238 376"/>
+                    <path class="shiki-claw" d="M269 333 L275 374"/>
+                    <path class="shiki-claw" d="M284 321 L308 356"/>
+
+                    <path class="shiki-part shiki-head" d="M72 62 C96 18 138 22 159 43 C181 21 222 26 246 64 C279 117 259 178 218 199 C184 216 128 216 94 199 C54 178 39 118 72 62 Z"/>
+                    <path class="shiki-ridge" d="M97 48 C108 80 110 119 101 154"/>
+                    <path class="shiki-ridge" d="M121 35 C132 77 133 125 119 164"/>
+                    <path class="shiki-ridge" d="M149 33 C154 79 154 130 145 171"/>
+                    <path class="shiki-ridge" d="M178 34 C172 81 173 129 184 168"/>
+                    <path class="shiki-ridge" d="M205 43 C194 82 193 123 207 158"/>
+                    <path class="shiki-ridge" d="M226 59 C209 88 209 121 229 147"/>
+
+                    <path class="shiki-mouth" d="M82 151 C100 135 124 135 160 139 C196 135 222 136 239 153 C232 196 205 223 161 224 C118 223 91 195 82 151 Z"/>
+                    <path class="shiki-inner-mouth" d="M107 163 C128 173 191 173 214 164 C207 200 188 211 161 212 C132 211 114 199 107 163 Z"/>
+
+                    <g class="shiki-teeth-top">
+                        <path d="M105 157 L116 188 L127 158 Z"/>
+                        <path d="M127 156 L138 190 L149 157 Z"/>
+                        <path d="M150 156 L160 193 L171 156 Z"/>
+                        <path d="M172 157 L183 190 L194 156 Z"/>
+                        <path d="M194 158 L205 188 L216 158 Z"/>
+                    </g>
+                    <g class="shiki-teeth-bottom">
+                        <path d="M113 215 L124 184 L135 215 Z"/>
+                        <path d="M136 217 L148 183 L160 218 Z"/>
+                        <path d="M160 218 L172 183 L184 217 Z"/>
+                        <path d="M185 215 L196 184 L207 214 Z"/>
+                    </g>
+
+                    <path class="shiki-hair" d="M86 53 C62 30 60 9 83 2 C104 -3 117 22 108 52"/>
+                    <path class="shiki-hair" d="M115 39 C101 5 119 -10 142 8 C158 22 146 51 134 66"/>
+                    <path class="shiki-hair" d="M155 39 C156 0 184 -4 196 18 C205 35 185 55 170 69"/>
+                    <path class="shiki-hair" d="M203 50 C213 18 241 17 252 40 C261 59 236 73 215 76"/>
+
+                    <g class="shiki-fingers shiki-left-fingers">
+                        <path d="M46 317 C33 326 25 342 20 360"/>
+                        <path d="M57 323 C48 338 43 356 39 375"/>
+                        <path d="M68 326 C63 343 62 362 63 382"/>
+                        <path d="M80 324 C82 341 88 358 96 374"/>
+                        <path d="M91 316 C100 330 110 344 123 357"/>
+                        <path class="shiki-fingertip" d="M20 360 L13 379 L27 363 Z"/>
+                        <path class="shiki-fingertip" d="M39 375 L35 395 L47 377 Z"/>
+                        <path class="shiki-fingertip" d="M63 382 L64 403 L70 382 Z"/>
+                        <path class="shiki-fingertip" d="M96 374 L108 391 L102 371 Z"/>
+                        <path class="shiki-fingertip" d="M123 357 L142 368 L128 352 Z"/>
+                    </g>
+                    <g class="shiki-fingers shiki-right-fingers">
+                        <path d="M230 314 C220 329 211 346 203 364"/>
+                        <path d="M242 322 C235 340 232 359 229 379"/>
+                        <path d="M254 326 C254 344 257 363 263 381"/>
+                        <path d="M266 323 C273 338 283 354 294 369"/>
+                        <path d="M276 313 C290 323 303 337 315 352"/>
+                        <path class="shiki-fingertip" d="M203 364 L190 382 L209 367 Z"/>
+                        <path class="shiki-fingertip" d="M229 379 L222 399 L237 381 Z"/>
+                        <path class="shiki-fingertip" d="M263 381 L270 401 L270 380 Z"/>
+                        <path class="shiki-fingertip" d="M294 369 L311 382 L300 364 Z"/>
+                        <path class="shiki-fingertip" d="M315 352 L337 359 L321 346 Z"/>
+                    </g>
+                </svg>
+            </div>
+
             <div class="balloon">
                 <span class="balloon-knot"></span>
                 <span class="balloon-string"></span>

@@ -1237,8 +1237,8 @@ body {
 }
 
 .shikigami-skill-icon {
-    left: 50%;
-    top: 100%;
+    left: 116%;
+    top: 10%;
 }
 
 .demon-skill-icon.is-active,
@@ -1287,6 +1287,344 @@ body {
     border-top: 3px solid rgba(37, 18, 11, 0.28);
     border-radius: 50%;
 }
+
+.shikigami-summon {
+    position: absolute;
+    left: 50%;
+    bottom: -9%;
+    z-index: 4;
+    width: 96%;
+    height: 112%;
+    pointer-events: none;
+    opacity: 0;
+    filter:
+        drop-shadow(0 18px 18px rgba(0, 0, 0, 0.64))
+        drop-shadow(0 0 14px rgba(255, 255, 255, 0.18));
+    transform: translate(-50%, 16%) scale(0.58);
+    transform-origin: 50% 88%;
+    transition: opacity 0.28s ease, transform 0.55s cubic-bezier(0.16, 0.9, 0.22, 1.18);
+}
+
+.dog-scene.is-shikigami .shikigami-summon {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+    animation: shikigami-breathe 1.8s ease-in-out 0.55s infinite alternate;
+}
+
+.dog-scene.is-shikigami .dog {
+    opacity: 0.08;
+}
+
+.shikigami-summon span {
+    position: absolute;
+    box-sizing: border-box;
+}
+
+.shikigami-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.shiki-part {
+    fill: url("#shiki-white");
+    stroke: #11151d;
+    stroke-width: 6;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+}
+
+.shiki-tail {
+    fill: url("#shiki-dark");
+}
+
+.shiki-tail-light {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.26);
+    stroke-width: 4;
+    stroke-linecap: round;
+}
+
+.shiki-body {
+    filter: drop-shadow(0 5px 4px rgba(0, 0, 0, 0.35));
+}
+
+.shiki-line {
+    fill: none;
+    stroke: rgba(22, 26, 34, 0.78);
+    stroke-width: 5;
+    stroke-linecap: round;
+}
+
+.shiki-head {
+    filter: drop-shadow(0 8px 6px rgba(0, 0, 0, 0.42));
+}
+
+.shiki-spot {
+    fill: #07080c;
+    stroke: #11151d;
+    stroke-width: 3;
+}
+
+.shiki-ridge {
+    fill: none;
+    stroke: #cfd5da;
+    stroke-width: 18;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 1px #11151d);
+}
+
+.shiki-mouth {
+    fill: url("#shiki-mouth");
+    stroke: #f2f3ef;
+    stroke-width: 8;
+    stroke-linejoin: round;
+}
+
+.shiki-inner-mouth {
+    fill: #130914;
+    stroke: rgba(70, 25, 22, 0.9);
+    stroke-width: 4;
+}
+
+.shiki-teeth-top path,
+.shiki-teeth-bottom path {
+    fill: #d9e3c8;
+    stroke: #20252d;
+    stroke-width: 3;
+    stroke-linejoin: round;
+}
+
+.shiki-hair {
+    fill: url("#shiki-white");
+    stroke: #11151d;
+    stroke-width: 5;
+    stroke-linejoin: round;
+}
+
+.shiki-claw {
+    display: none;
+}
+
+.shiki-fingers path {
+    fill: none;
+    stroke: #f6f7f3;
+    stroke-width: 12;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 1px #11151d);
+}
+
+.shiki-fingers .shiki-fingertip {
+    fill: #f6f7f3;
+    stroke: #11151d;
+    stroke-width: 3;
+    stroke-linejoin: round;
+    filter: none;
+}
+
+.shikigami-tail {
+    left: 28%;
+    bottom: 0;
+    z-index: 1;
+    width: 46%;
+    height: 58%;
+    background:
+        radial-gradient(ellipse at 62% 16%, rgba(255, 255, 255, 0.18) 0 7%, transparent 10%),
+        linear-gradient(112deg, #06070b 0%, #202431 32%, #050508 64%, #1d212c 100%);
+    border: 4px solid #05060a;
+    border-radius: 54% 46% 50% 50% / 14% 18% 76% 84%;
+    box-shadow:
+        inset 15px 0 15px rgba(255, 255, 255, 0.09),
+        inset -22px -6px 18px rgba(0, 0, 0, 0.82);
+    clip-path: polygon(44% 0, 67% 9%, 60% 28%, 78% 39%, 94% 54%, 88% 73%, 68% 73%, 76% 92%, 48% 100%, 18% 88%, 7% 66%, 24% 49%, 17% 26%);
+    transform: rotate(4deg);
+}
+
+.shikigami-tail-glow {
+    left: 43%;
+    bottom: 8%;
+    z-index: 2;
+    width: 24%;
+    height: 45%;
+    border-left: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: rotate(5deg);
+}
+
+.shikigami-torso {
+    left: 28%;
+    top: 43%;
+    z-index: 4;
+    width: 44%;
+    height: 27%;
+    background:
+        repeating-linear-gradient(178deg, transparent 0 13%, rgba(25, 28, 33, 0.28) 13% 16%, transparent 16% 24%),
+        linear-gradient(100deg, #f9faf8 0%, #c7cdd1 36%, #ffffff 55%, #848c96 100%);
+    border: 4px solid #141820;
+    border-radius: 42% 42% 36% 36% / 28% 30% 72% 72%;
+    box-shadow:
+        inset 15px 0 13px rgba(255, 255, 255, 0.66),
+        inset -18px -8px 18px rgba(12, 15, 20, 0.42);
+    transform: rotate(1deg);
+}
+
+.shikigami-spine {
+    left: 45%;
+    top: 38%;
+    z-index: 5;
+    width: 10%;
+    height: 36%;
+    background: linear-gradient(#ffffff 0%, #c7ccd0 58%, #171a22 100%);
+    border: 3px solid #151922;
+    border-radius: 48% 52% 40% 44%;
+    box-shadow: inset -7px -5px 8px rgba(0, 0, 0, 0.32);
+}
+
+.shikigami-rib {
+    left: 32%;
+    z-index: 6;
+    width: 36%;
+    height: 5.5%;
+    border-top: 4px solid rgba(21, 25, 32, 0.82);
+    border-radius: 50%;
+    background: linear-gradient(90deg, #fdfdfb, #c9ced2 60%, #777f89);
+}
+
+.rib-one { top: 47%; transform: rotate(-8deg); }
+.rib-two { top: 51%; transform: rotate(-5deg); }
+.rib-three { top: 55%; transform: rotate(-2deg); }
+.rib-four { top: 59%; transform: rotate(1deg); }
+.rib-five { top: 63%; transform: rotate(5deg); }
+.rib-six { top: 67%; transform: rotate(8deg); }
+
+.shikigami-head {
+    left: 14%;
+    top: 4%;
+    z-index: 10;
+    width: 72%;
+    height: 47%;
+    background:
+        radial-gradient(circle at 17% 37%, #101116 0 4%, transparent 4.6%),
+        radial-gradient(circle at 11% 50%, #0b0c11 0 5%, transparent 5.8%),
+        radial-gradient(circle at 83% 18%, #111218 0 5%, transparent 5.8%),
+        radial-gradient(circle at 88% 38%, #090a0e 0 4%, transparent 4.8%),
+        linear-gradient(112deg, #ffffff 0%, #d6d9dc 34%, #ffffff 58%, #969da5 100%);
+    border: 4px solid #11151d;
+    border-radius: 48% 52% 42% 44% / 34% 36% 60% 62%;
+    box-shadow:
+        inset 18px 5px 18px rgba(255, 255, 255, 0.72),
+        inset -18px -12px 22px rgba(18, 22, 29, 0.34);
+}
+
+.shikigami-face {
+    left: 26%;
+    top: 16%;
+    z-index: 12;
+    width: 48%;
+    height: 28%;
+    background:
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.94) 0 11%, rgba(205, 211, 216, 0.96) 11% 15%, rgba(255, 255, 255, 0.96) 15% 25%),
+        linear-gradient(#ffffff, #d3d8dc);
+    border: 3px solid #161a22;
+    border-radius: 50% 50% 36% 36% / 78% 78% 24% 24%;
+    box-shadow:
+        inset 0 10px 12px rgba(255, 255, 255, 0.72),
+        inset 0 -10px 14px rgba(67, 76, 86, 0.28);
+}
+
+.shikigami-mouth {
+    left: 24%;
+    top: 34%;
+    z-index: 13;
+    width: 52%;
+    height: 24%;
+    background:
+        radial-gradient(ellipse at 50% 62%, #2a1630 0 42%, transparent 43%),
+        linear-gradient(90deg, #7b2c22 0%, #241012 22%, #0a0608 50%, #241012 78%, #7b2c22 100%);
+    border: 5px solid #f1f2ef;
+    border-top-width: 7px;
+    border-radius: 0 0 48% 48% / 0 0 86% 86%;
+    box-shadow: 0 0 0 3px #151920, inset 0 7px 10px rgba(0, 0, 0, 0.7);
+    clip-path: polygon(0 8%, 100% 8%, 88% 92%, 50% 100%, 12% 92%);
+}
+
+.shikigami-teeth {
+    left: 30%;
+    z-index: 14;
+    width: 40%;
+    height: 9%;
+    background:
+        linear-gradient(135deg, transparent 0 28%, #dce5c9 29% 67%, transparent 68%),
+        linear-gradient(45deg, transparent 0 28%, #cbd6b8 29% 67%, transparent 68%);
+    background-size: 18px 100%, 18px 100%;
+    background-position: 0 0, 9px 0;
+    background-repeat: repeat-x;
+    filter: drop-shadow(0 1px 0 #151920);
+}
+
+.teeth-top { top: 36%; }
+.teeth-bottom { top: 47%; transform: scaleY(-1); }
+
+.shikigami-hair {
+    z-index: 15;
+    width: 9%;
+    height: 35%;
+    background: linear-gradient(#ffffff 0%, #d7dde1 68%, #7b848d 100%);
+    border: 3px solid #151920;
+    border-radius: 78% 22% 78% 22% / 82% 20% 80% 18%;
+    box-shadow: inset 5px 2px 6px rgba(255, 255, 255, 0.72), inset -5px -4px 7px rgba(0, 0, 0, 0.18);
+    transform-origin: 50% 100%;
+}
+
+.hair-a { left: 28%; top: -4%; transform: rotate(-43deg); }
+.hair-b { left: 39%; top: -8%; height: 39%; transform: rotate(-20deg); }
+.hair-c { left: 50%; top: -9%; height: 41%; transform: rotate(0deg); }
+.hair-d { left: 61%; top: -7%; height: 39%; transform: rotate(21deg); }
+.hair-e { left: 71%; top: -2%; transform: rotate(43deg); }
+
+.shikigami-arm {
+    z-index: 7;
+    width: 18%;
+    height: 43%;
+    background:
+        linear-gradient(100deg, #ffffff 0%, #d3d8dc 38%, #ffffff 54%, #818994 100%);
+    border: 4px solid #11151d;
+    border-radius: 50% 38% 28% 28% / 20% 20% 78% 78%;
+    box-shadow:
+        inset 9px 3px 10px rgba(255, 255, 255, 0.72),
+        inset -9px -8px 13px rgba(12, 15, 20, 0.38);
+}
+
+.arm-front {
+    right: 5%;
+    top: 42%;
+    transform: rotate(14deg);
+}
+
+.arm-back {
+    left: 8%;
+    top: 42%;
+    transform: rotate(-16deg);
+}
+
+.shikigami-claw {
+    z-index: 8;
+    width: 5.8%;
+    height: 18%;
+    background: linear-gradient(#ffffff 0%, #d5dade 58%, #424a55 100%);
+    border: 3px solid #11151d;
+    border-radius: 62% 38% 14% 86% / 18% 22% 78% 82%;
+    transform-origin: 50% 0;
+}
+
+.claw-front-a { right: 3%; top: 76%; transform: rotate(12deg); }
+.claw-front-b { right: 10%; top: 79%; transform: rotate(2deg); }
+.claw-front-c { right: 17%; top: 77%; transform: rotate(-11deg); }
+.claw-back-a { left: 4%; top: 77%; transform: rotate(-18deg); }
+.claw-back-b { left: 11%; top: 80%; transform: rotate(-6deg); }
+.claw-back-c { left: 18%; top: 78%; transform: rotate(8deg); }
 
 .dog {
     position: absolute;
@@ -3347,6 +3685,16 @@ body {
     }
 }
 
+@keyframes shikigami-breathe {
+    from {
+        transform: translate(-50%, 0) scale(1);
+    }
+
+    to {
+        transform: translate(-50%, -2%) scale(1.035);
+    }
+}
+
 @media (max-width: 640px) {
     body {
         position: fixed;
@@ -3368,6 +3716,12 @@ body {
         min-height: 50px;
         padding: 10px 14px;
         font-size: 13px;
+    }
+
+    .shikigami-summon {
+        bottom: -4%;
+        width: 88%;
+        height: 96%;
     }
 
     .dog-scene.is-sukuna.is-on-tomb .dog {

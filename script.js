@@ -159,6 +159,12 @@ function showNextPhrase(event) {
         return;
     }
 
+    if (dogScene.classList.contains("is-shikigami")) {
+        speechBubble.classList.remove("is-visible");
+        dog.classList.remove("is-talking");
+        return;
+    }
+
     if (isRocketSequence) {
         return;
     }
@@ -318,6 +324,12 @@ function hideDomainPopups() {
     dog.classList.remove("is-talking");
 }
 
+function hideShikigami() {
+    dogScene.classList.remove("is-shikigami");
+    shikigamiSkillIcon.classList.remove("is-active");
+    shikigamiSkillIcon.setAttribute("aria-pressed", "false");
+}
+
 function resetDomainScene() {
     hideDomainPopups();
     dogScene.classList.remove("is-sukuna");
@@ -345,6 +357,7 @@ dog.addEventListener("click", showNextPhrase);
 demonSkillIcon.addEventListener("click", (event) => {
     event.preventDefault();
     event.stopPropagation();
+    hideShikigami();
 
     const isActive = dogScene.classList.toggle("is-sukuna");
     demonSkillIcon.classList.toggle("is-active", isActive);
@@ -355,4 +368,21 @@ demonSkillIcon.addEventListener("click", (event) => {
     } else {
         hideDomainPopups();
     }
+});
+
+shikigamiSkillIcon.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (dogScene.classList.contains("is-sukuna")) {
+        resetDomainScene();
+    }
+
+    clearTimeout(speechTimer);
+    speechBubble.classList.remove("is-visible");
+    dog.classList.remove("is-talking");
+
+    const isActive = dogScene.classList.toggle("is-shikigami");
+    shikigamiSkillIcon.classList.toggle("is-active", isActive);
+    shikigamiSkillIcon.setAttribute("aria-pressed", String(isActive));
 });
