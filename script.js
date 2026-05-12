@@ -152,6 +152,12 @@ function showNextPhrase(event) {
 
     lastInteractionTime = now;
 
+    if (dogScene.classList.contains("is-sukuna")) {
+        speechBubble.classList.remove("is-visible");
+        dog.classList.remove("is-talking");
+        return;
+    }
+
     if (isRocketSequence) {
         return;
     }
