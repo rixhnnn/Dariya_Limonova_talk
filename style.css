@@ -1403,6 +1403,23 @@ body {
     stroke-linejoin: round;
 }
 
+.shiki-back-hair path {
+    fill: url("#shiki-white");
+    stroke: #11151d;
+    stroke-width: 4;
+    stroke-linejoin: round;
+    filter:
+        drop-shadow(0 3px 2px rgba(17, 21, 29, 0.7))
+        drop-shadow(0 5px 5px rgba(0, 0, 0, 0.28));
+}
+
+.shiki-back-hair circle,
+.shiki-hair-spot {
+    fill: #07080c;
+    stroke: #11151d;
+    stroke-width: 2;
+}
+
 .shiki-claw {
     display: none;
 }
