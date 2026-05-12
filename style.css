@@ -1207,7 +1207,8 @@ body {
     transform: rotate(-38deg) scale(0.7);
 }
 
-.demon-skill-icon {
+.demon-skill-icon,
+.shikigami-skill-icon {
     position: absolute;
     left: 49%;
     top: -35%;
@@ -1235,7 +1236,13 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
-.demon-skill-icon.is-active {
+.shikigami-skill-icon {
+    left: 50%;
+    top: 100%;
+}
+
+.demon-skill-icon.is-active,
+.shikigami-skill-icon.is-active {
     background: #ffe2e2;
     color: #8b0000;
     transform: translateX(-50%) translateY(5px);
@@ -1244,30 +1251,36 @@ body {
         0 0 18px rgba(255, 28, 12, 0.55);
 }
 
-.demon-skill-icon.is-hidden {
+.demon-skill-icon.is-hidden,
+.shikigami-skill-icon.is-hidden {
     opacity: 0;
     visibility: hidden;
     transform: translateX(-50%) scale(0.86);
 }
 
-.demon-skill-icon.is-active.is-hidden {
+.demon-skill-icon.is-active.is-hidden,
+.shikigami-skill-icon.is-active.is-hidden {
     transform: translateX(-50%) scale(0.86);
 }
 
 .demon-skill-icon::before,
-.demon-skill-icon::after {
+.demon-skill-icon::after,
+.shikigami-skill-icon::before,
+.shikigami-skill-icon::after {
     content: "";
     position: absolute;
     pointer-events: none;
 }
 
-.demon-skill-icon::before {
+.demon-skill-icon::before,
+.shikigami-skill-icon::before {
     inset: 7px;
     border: 2px solid rgba(37, 18, 11, 0.16);
     border-radius: inherit;
 }
 
-.demon-skill-icon::after {
+.demon-skill-icon::after,
+.shikigami-skill-icon::after {
     inset: 7px 13px auto auto;
     width: 16px;
     height: 8px;
@@ -3346,6 +3359,15 @@ body {
         width: min(76vw, 300px);
         height: min(76vw, 300px);
         transform: translateY(-8vh);
+    }
+
+    .shikigami-skill-icon {
+        left: 86%;
+        top: -8%;
+        width: 142px;
+        min-height: 50px;
+        padding: 10px 14px;
+        font-size: 13px;
     }
 
     .dog-scene.is-sukuna.is-on-tomb .dog {

@@ -11,6 +11,7 @@ const domainSlashes = document.querySelector(".domain-slashes");
 const domainDryPeople = document.querySelectorAll(".domain-dry-person");
 const domainTomb = document.querySelector(".domain-tomb");
 const demonSkillIcon = document.querySelector(".demon-skill-icon");
+const shikigamiSkillIcon = document.querySelector(".shikigami-skill-icon");
 const rocketLayer = document.querySelector(".rocket-layer");
 const littlePeople = document.querySelectorAll(".little-person");
 const domainPhrases = [
@@ -205,6 +206,7 @@ function showDomainPopupSequence() {
     speechBubble.classList.remove("is-visible");
     dog.classList.remove("is-talking");
     demonSkillIcon.classList.add("is-hidden");
+    shikigamiSkillIcon.classList.add("is-hidden");
     domainRiver.classList.remove("is-visible");
     domainSlashes.classList.remove("is-active");
     domainDryPeople.forEach((person) => person.classList.remove("is-visible"));
@@ -311,6 +313,7 @@ function hideDomainPopups() {
     domainTomb.classList.remove("is-visible");
     dogScene.classList.remove("is-on-tomb", "is-domain-exiting");
     demonSkillIcon.classList.remove("is-hidden");
+    shikigamiSkillIcon.classList.remove("is-hidden");
     speechBubble.classList.remove("is-visible");
     dog.classList.remove("is-talking");
 }
